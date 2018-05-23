@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>fish_need_sea</title>
-  
+  <icon>https://www.gravatar.com/avatar/abda6d8c22ea7f0b52720e09ea7f58e3</icon>
   <subtitle>没尾巴的鱼</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://fishluo1992.github.io/"/>
   <updated>2018-05-23T01:10:46.117Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://fishluo1992.github.io/</id>
   
   <author>
     <name>no one</name>
-    
+    <email>18720090169@163.com</email>
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
     <title>think</title>
-    <link href="http://yoursite.com/2018/05/22/%E9%B1%BC%E7%9A%84%E4%B8%96%E7%95%8C/"/>
-    <id>http://yoursite.com/2018/05/22/鱼的世界/</id>
+    <link href="http://fishluo1992.github.io/2018/05/22/%E9%B1%BC%E7%9A%84%E4%B8%96%E7%95%8C/"/>
+    <id>http://fishluo1992.github.io/2018/05/22/鱼的世界/</id>
     <published>2018-05-22T06:53:28.000Z</published>
     <updated>2018-05-23T01:10:46.117Z</updated>
     
@@ -38,14 +38,14 @@
     </summary>
     
     
-      <category term="Thinking" scheme="http://yoursite.com/tags/Thinking/"/>
+      <category term="Thinking" scheme="http://fishluo1992.github.io/tags/Thinking/"/>
     
   </entry>
   
   <entry>
     <title>normalize.css</title>
-    <link href="http://yoursite.com/2018/05/22/normalize8.0/"/>
-    <id>http://yoursite.com/2018/05/22/normalize8.0/</id>
+    <link href="http://fishluo1992.github.io/2018/05/22/normalize8.0/"/>
+    <id>http://fishluo1992.github.io/2018/05/22/normalize8.0/</id>
     <published>2018-05-22T06:53:28.000Z</published>
     <updated>2018-05-23T06:51:36.877Z</updated>
     
@@ -62,7 +62,7 @@
     </summary>
     
     
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+      <category term="CSS" scheme="http://fishluo1992.github.io/tags/CSS/"/>
     
   </entry>
   
