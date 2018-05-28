@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fishluo1992.github.io/"/>
-  <updated>2018-05-28T10:39:37.018Z</updated>
+  <updated>2018-05-28T10:43:39.851Z</updated>
   <id>http://fishluo1992.github.io/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="http://fishluo1992.github.io/2018/05/28/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
     <id>http://fishluo1992.github.io/2018/05/28/原型链/</id>
     <published>2018-05-28T10:33:28.000Z</published>
-    <updated>2018-05-28T10:39:37.018Z</updated>
+    <updated>2018-05-28T10:43:39.851Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="./img/prototype_img.png" alt="js原型链">  </p>]]></content>
+    <content type="html"><![CDATA[<p><img src="../../../../img/prototype_img.png" alt="js原型链">  </p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;img src=&quot;./img/prototype_img.png&quot; alt=&quot;js原型链&quot;&gt;  &lt;/p&gt;
+        &lt;p&gt;&lt;img src=&quot;../../../../img/prototype_img.png&quot; alt=&quot;js原型链&quot;&gt;  &lt;/p&gt;
 
       
     
