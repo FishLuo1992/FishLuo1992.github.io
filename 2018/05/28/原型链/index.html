@@ -90,7 +90,7 @@
 <meta property="og:description" content="原型链图(先上图)   图片网上找的… 原理原型链的继承大家都知道面向对象有三大基本特性 ：封装、继承、多态。继承是指让某个类型的对象获得另一个类型的对象的属性和方法。而原型和原型链是Javascript实现继承的一种模型。原型链的基本思想就是利用原型让一个引用类型继承另一个引用类型的属性和方法。原型链的构建是通过将一个类型的实例赋值给另一个构造函数的原型实现的。Javascript在创建对象的时">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fishluo1992.github.io/img/prototype_img.png">
-<meta property="og:updated_time" content="2018-05-29T10:02:48.201Z">
+<meta property="og:updated_time" content="2018-05-30T08:48:12.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型链的继承">
 <meta name="twitter:description" content="原型链图(先上图)   图片网上找的… 原理原型链的继承大家都知道面向对象有三大基本特性 ：封装、继承、多态。继承是指让某个类型的对象获得另一个类型的对象的属性和方法。而原型和原型链是Javascript实现继承的一种模型。原型链的基本思想就是利用原型让一个引用类型继承另一个引用类型的属性和方法。原型链的构建是通过将一个类型的实例赋值给另一个构造函数的原型实现的。Javascript在创建对象的时">
@@ -342,7 +342,7 @@
     console.log(b.__proto__ === Object.prototype) // true</code><br>我们发现a和b都有<code>__proto__</code>，分别指向了Array.prototype和Object.prototype。其实a,b都是内置的构造函数的实例对象，都基于类型分别继承了构造函数的prtotype。 </p>
 <p>平常写的时候感觉很正常，其实像Array、Object这样的函数内置对象还有 Date、Function、RegExp、Json、Math。 </p>
 <p>##构造函数  </p>
-<p>只要创建一个新函数，就会根据规则给这个函数创建一个prototype属性，这个属性指向函数的原型对象。<br>也可以这样理解，所有函数对象都指向Function.prototype，都是Function的实例。<br><code>function Fn(){}  console.log(Fn.__proto__ === Function.prototype) //true</code><br>也就是说，<code>__proto__</code>存在于实例与构造函数原型对象之间，而不是存在于实例与构造函数之间。也可以理解为原型链的形成主要还是看<code>__proto__</code>，而不是prototype。  </p>
+<p>只要创建一个新函数，就会根据规则给这个函数创建一个prototype属性，这个属性指向函数的原型对象。<br>也可以这样理解，所有函数对象都指向Function.prototype，都是Function的实例。<br><code>function Fn(){}  console.log(Fn.__proto__ === Function.prototype) //true</code><br>也就是说，<code>__proto__</code>存在于实例与构造函数原型对象之间，而不是存在于实例与构造函数之间。也可以理解为原型链的形成主要还是看<code>__proto__</code>，而不是prototype。<br>趁项目做完，忙里偷闲弄下博客（以前的总结都在txt里，哈哈）。  </p>
 
       
     </div>
@@ -369,22 +369,6 @@
       
       
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/05/22/鱼的世界/" rel="next" title="一条热血的鱼">
-                <i class="fa fa-chevron-left"></i> 一条热血的鱼
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
       
 
       
@@ -465,7 +449,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -478,7 +462,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
