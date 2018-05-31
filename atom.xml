@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fishluo1992.github.io/"/>
-  <updated>2018-05-30T08:48:12.320Z</updated>
+  <updated>2018-05-31T02:43:32.830Z</updated>
   <id>http://fishluo1992.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>奇怪的流程</title>
+    <link href="http://fishluo1992.github.io/2018/05/31/vue%E7%9A%84%E5%B0%8F%E5%9D%91one/"/>
+    <id>http://fishluo1992.github.io/2018/05/31/vue的小坑one/</id>
+    <published>2018-05-31T11:47:45.000Z</published>
+    <updated>2018-05-31T02:43:32.830Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h4><p>  这是上一个项目了，公司内部的OA系统，页面近30个了，由我这个前端和一个大神后台完成。总体时间也近两个月，接口的调试时间也占了很多，因为数据逻辑的耦合度太高了。<br>  下面谈谈一其中的个小需求吧！看图！  </p><p>  <img src="../../../../img/project_1.png" alt="js原型链"><br>  就是这种审批流程图，看起来比一般的线流程图多了一点样式。因为项目的模块不少，每个模块都有不同的审批流程，像这样  </p><p>   <img src="../../../../img/project_2.png" alt="js原型链">  </p><h2 id="解剖一下"><a href="#解剖一下" class="headerlink" title="解剖一下"></a>解剖一下</h2><p>   每个模块多个流程都需要看到这个流程走向，图像的上面是一个显示详细审批的信息列表。因为每个模块的流程图都不同，所有只能每个模块封装一个独有的组件来分别显示。 数据直接父组件传给子组件。 </p><p> <em>逻辑思考</em><br>  看到这样的设计图，直接简单粗暴的分析下。<br>  流程的显示有三种，分别是未开始、已处理和下一步处理，另外还有个驳回箭头。<br>  1.一般来讲，我们首先想到的会是用canvas来控制几种样式的逻辑<br>  2.另外还可以用JS+CSS来控制。  </p><p>   <em>动手</em><br> 嗯，canvas貌似也不错，在花了一小时画完这个图后，瞅瞅代码，这什么鬼。一大堆逻辑判断，代码上百行，连自己看不下去了。再试试下个方案吧。<br> vue,可以类似JSP页面，HTML可以嵌套JS。那么逻辑控制显示就没问题了。既能选了JS+CSS,那就得先把图画好了，圆和条子很简单，箭头也直接border画个三角形就OK了，不正规的菱形？两个三角形对立就OK了。  </p><pre><code>border-top: 5px solid transparent;border-bottom: 5px solid transparent;border-left: 5px solid #878787;  </code></pre><p>对的，就是这样。  </p><p><em>逻辑和数据处理</em><br>UI界面的图就这样完美出来了，是不难吧。嗯，只是开始。后台给我的接口只有一个数据seq来控制整个流程。对的，只有一个seq！！！ 我这边需要控制每个步骤图的三种不同的显示和驳回箭头的显示。   </p><p>嗯，不难，真的。只是多了点判断，像这样。  </p><pre><code> if(res.data.data.length &gt; 1 &amp;&amp; index == res.data.data.length-1){    if(arr[index].seq &lt; arr[index-1].seq){        if(arr[index-1].seq == 2){            that.ctrl = {&quot;step&quot;:Number(item.seq)-1,&quot;stop&quot;:1}        }else if(arr[index-1].seq == 5){            that.ctrl = {&quot;step&quot;:Number(item.seq)-1,&quot;stop&quot;:2}        }else if(arr[index-1].seq == 6){            that.ctrl = {&quot;step&quot;:Number(item.seq)-1,&quot;stop&quot;:3}        }else{            that.ctrl = {&quot;step&quot;:8,&quot;stop&quot;:0}        }                }else{        that.ctrl = {&quot;step&quot;:Number(item.seq),&quot;stop&quot;:0}    }    }else{    that.ctrl = {&quot;step&quot;:1,&quot;stop&quot;:0}}</code></pre><p>最终直接把ctrl传给子组件，参数是step和驳回的stop。那么接下来就是子组件控制流程的样式了，对的，这个也不难。<br>先取到数据  </p><pre><code>watch:{     ctrl:function(newval,oldval){             if(newval != oldval){                 this.getData()             }         } }, props:{     ctrl:{         type:Object,         default:function(){             return {};         }     } }</code></pre><p>因为一个模块内的每个流程都需要这个显示，所有需要watch一下保证数据完美的显示。  </p><p>##问题来了<br>数据有了，基本页面也完美展示了，那通过数据该咋渲染呢？<br>嗯，这个也不难。用来控制Class来控制就好，像这样  </p><pre><code>:class=&quot;step_t?&apos;ctrl-step-rebut&apos;:&apos;&apos;&quot;   </code></pre><p>是的这样可以控制两种，那这里有三种咋控制呢？这样？  </p><pre><code>:class=&quot;stepTwo?&apos;ctrl-first-right-writhe&apos;:(stepOne?&apos;ctrl-first-right-son&apos;:&apos;&apos;)&quot;  </code></pre><p>对的，就是这样，理论上三元表达式可以无线叠，但业内一般不会这样，万一其他人来维护这个项目呢，那不直接带刀找你了。<br>这样就可以完美的控制三种显示了，step 和 stop 完美直接  </p><pre><code>switch (this.ctrl.stop)           {               case 1:                 ...                break;                case 2:                ...                break;                 case 3:                ...                break;            }    switch (this.ctrl.step){...}  </code></pre><p> 就这样，直接判断出流程走到哪一步，直接再通过显示哪里class来显示对应的样式就可以了。  </p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1.相比canvas来讲，用JS+css来解决这样流图更好，代码没那么复杂，能一看就懂，样式和一些逻辑也可以复用，清晰易懂。<br>2.业务都不难，难的是对底层代码的理解和自己实现业务逻辑的方法。每次碰到带点逻辑的业务还是需要仔细分析，保证自己能做到自己能做到的极限。<br>3.vue用起来还是很爽的，下一篇博客也来讲讲自己对vue的理解吧。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;起源&quot;&gt;&lt;a href=&quot;#起源&quot; class=&quot;headerlink&quot; title=&quot;起源&quot;&gt;&lt;/a&gt;起源&lt;/h4&gt;&lt;p&gt;  这是上一个项目了，公司内部的OA系统，页面近30个了，由我这个前端和一个大神后台完成。总体时间也近两个月，接口的调试时间也占了很多，因为
+      
+    
+    </summary>
+    
+    
+      <category term="Vue" scheme="http://fishluo1992.github.io/tags/Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>原型链的继承</title>
