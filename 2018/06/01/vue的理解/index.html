@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="World, Sea" />
+  <meta name="keywords" content="Vue," />
 
 
 
@@ -81,19 +81,20 @@
 
 
 
-<meta name="description" content="title: 我对vue的理解date: 2018-06-1 11:10:45tags: Vue archives: JS人生时苦，所以要做一个简单的人，常想一二，不思八九，越活越带感。   vue响应式原理用过vue写过项目或者看过vue的同学在被问到“vue的响应式原理时”可能都会直接说：  Vue 是通过Object.defineProperty方法把data对象的全部属性转化成gette">
+<meta name="description" content="人生时苦，所以要做一个简单的人，常想一二，不思八九，越活越带感。   vue响应式原理用过vue写过项目或者看过vue的同学在被问到“vue的响应式原理时”可能都会直接说：  Vue 是通过Object.defineProperty方法把data对象的全部属性转化成getter/setter，当属性被访问或者被修改时通知变化。   Object.defineProperty的API的定义？这个就是">
+<meta name="keywords" content="Vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="fish_need_sea">
+<meta property="og:title" content="Vue的MVVM">
 <meta property="og:url" content="http://fishluo1992.github.io/2018/06/01/vue的理解/index.html">
 <meta property="og:site_name" content="fish_need_sea">
-<meta property="og:description" content="title: 我对vue的理解date: 2018-06-1 11:10:45tags: Vue archives: JS人生时苦，所以要做一个简单的人，常想一二，不思八九，越活越带感。   vue响应式原理用过vue写过项目或者看过vue的同学在被问到“vue的响应式原理时”可能都会直接说：  Vue 是通过Object.defineProperty方法把data对象的全部属性转化成gette">
+<meta property="og:description" content="人生时苦，所以要做一个简单的人，常想一二，不思八九，越活越带感。   vue响应式原理用过vue写过项目或者看过vue的同学在被问到“vue的响应式原理时”可能都会直接说：  Vue 是通过Object.defineProperty方法把data对象的全部属性转化成getter/setter，当属性被访问或者被修改时通知变化。   Object.defineProperty的API的定义？这个就是">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fishluo1992.github.io/img/vue_prototype.jpg">
-<meta property="og:image" content="http://fishluo1992.github.io/img/vue_mvvm.jpg">
-<meta property="og:updated_time" content="2018-06-01T08:49:01.322Z">
+<meta property="og:image" content="http://fishluo1992.github.io/img/vue_mvvm.png">
+<meta property="og:updated_time" content="2018-06-01T08:57:55.456Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fish_need_sea">
-<meta name="twitter:description" content="title: 我对vue的理解date: 2018-06-1 11:10:45tags: Vue archives: JS人生时苦，所以要做一个简单的人，常想一二，不思八九，越活越带感。   vue响应式原理用过vue写过项目或者看过vue的同学在被问到“vue的响应式原理时”可能都会直接说：  Vue 是通过Object.defineProperty方法把data对象的全部属性转化成gette">
+<meta name="twitter:title" content="Vue的MVVM">
+<meta name="twitter:description" content="人生时苦，所以要做一个简单的人，常想一二，不思八九，越活越带感。   vue响应式原理用过vue写过项目或者看过vue的同学在被问到“vue的响应式原理时”可能都会直接说：  Vue 是通过Object.defineProperty方法把data对象的全部属性转化成getter/setter，当属性被访问或者被修改时通知变化。   Object.defineProperty的API的定义？这个就是">
 <meta name="twitter:image" content="http://fishluo1992.github.io/img/vue_prototype.jpg">
 
 
@@ -130,7 +131,7 @@
 
 
 
-  <title> | fish_need_sea</title>
+  <title>Vue的MVVM | fish_need_sea</title>
   
 
 
@@ -284,7 +285,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">Vue的MVVM</h1>
         
 
         <div class="post-meta">
@@ -296,7 +297,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T10:54:16+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T00:00:00+08:00">
                 2018-06-01
               </time>
             
@@ -334,13 +335,11 @@
       
 
       
-        <hr>
-<p>title: 我对vue的理解<br>date: 2018-06-1 11:10:45<br>tags: Vue</p>
-<h2 id="archives-JS"><a href="#archives-JS" class="headerlink" title="archives: JS"></a>archives: JS</h2><p>人生时苦，所以要做一个简单的人，<br>常想一二，不思八九，<br>越活越带感。  </p>
+        <p>人生时苦，所以要做一个简单的人，<br>常想一二，不思八九，<br>越活越带感。  </p>
 <h2 id="vue响应式原理"><a href="#vue响应式原理" class="headerlink" title="vue响应式原理"></a>vue响应式原理</h2><p>用过vue写过项目或者看过vue的同学在被问到“vue的响应式原理时”可能都会直接说：  Vue 是通过Object.defineProperty方法把data对象的全部属性转化成getter/setter，当属性被访问或者被修改时通知变化。  </p>
 <p>Object.defineProperty的API的定义？这个就是ES5改变属性的值的一个API！这么回答肯定是有问题的，MDN的定义是：<br><em>Object.defineProperty()方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回这个对象。</em><br>再看vue官网介绍的响应式原理图。<br><img src="../../../../img/vue_prototype.jpg" alt="vue"><br> 首先通过渲染触发了Data的getter进行依赖收集，源码里有个一Deps订阅者，在数据变化时会通知所有的Watcher观察者，也就是说，在data变化时会触发它的setter，setter通知Watcher，Watcher通知组件执行Render Function，函数内再根据diff算法来实现视图的更新（render函数会根据内部的VDOM，也就是vue的虚拟DOM生成DOM树，diff就是新VDOM树与旧VDOM树进行深度对比(vue源码是比较新旧两个列表的vm的数据状态)，算出施加到真实DOM上的改动，然后通过createDocumentFragment创建对应的node节点(Vue内部的nodeType判断)再appendChild进index.html）。  </p>
 <h2 id="vue的MVVM"><a href="#vue的MVVM" class="headerlink" title="vue的MVVM"></a>vue的MVVM</h2><p>再分析vue的MVVM的实现  </p>
-<p><img src="../../../../img/vue_mvvm.jpg" alt="vue_mvvm"><br>      new MVVM()也就是vue的实例 new Vue()，是vue的入口函数,可以理解成构造函数Vue的实例。<br>      Observer 数据监听器，能够对数据对象的所有属性进行监听，如有变动可以通知订阅者。<br>      Watcher订阅者，作为连接Observer和Compile的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。<br>      Compile 指令解析器，对每个元素节点的指令进行扫描和解析，根据指令模板替换数据和绑定相应的更新数据。<br>      Dep 消息订阅器，observer内部维护的一个数组，用来收集订阅者Wacher，数据变动触发notify函数，再调用订阅者的update方法。  </p>
+<p><img src="../../../../img/vue_mvvm.png" alt="vue_mvvm"><br>      new MVVM()也就是vue的实例 new Vue()，是vue的入口函数,可以理解成构造函数Vue的实例。<br>      Observer 数据监听器，能够对数据对象的所有属性进行监听，如有变动可以通知订阅者。<br>      Watcher订阅者，作为连接Observer和Compile的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。<br>      Compile 指令解析器，对每个元素节点的指令进行扫描和解析，根据指令模板替换数据和绑定相应的更新数据。<br>      Dep 消息订阅器，observer内部维护的一个数组，用来收集订阅者Wacher，数据变动触发notify函数，再调用订阅者的update方法。  </p>
 <p>###new MVVM()<br>vue源码内的英文注释都是尤大大加的，对于英文不好的我只能查字典了。<br>先看vue的<a href="https://github.com/vuejs/vue/blob/dev/src/core/instance/state.js#L107" target="_blank" rel="noopener">initData</a> 这个就是new Vue内初始化的数据，内部将数据进行Observer监听数据变化。    </p>
 <pre><code>/*初始化data*/
 function initData (vm: Component) {
@@ -830,6 +829,12 @@ Dep.prototype = {
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
+      
 
       
       
@@ -872,6 +877,9 @@ Dep.prototype = {
 
           </div>
           
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
 
 
           
@@ -981,7 +989,7 @@ Dep.prototype = {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#archives-JS"><span class="nav-number">1.</span> <span class="nav-text">archives: JS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue响应式原理"><span class="nav-number">2.</span> <span class="nav-text">vue响应式原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue的MVVM"><span class="nav-number">3.</span> <span class="nav-text">vue的MVVM</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue响应式原理"><span class="nav-number">1.</span> <span class="nav-text">vue响应式原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue的MVVM"><span class="nav-number">2.</span> <span class="nav-text">vue的MVVM</span></a></li></ol></div>
             
 
           </div>
