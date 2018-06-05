@@ -376,7 +376,7 @@
                 }
                 _vm.searchItem($event)
               },
-</code></pre><p>上面被编译的就是我们的.vue文件，最终还是会被编译成这样的render函数。<br><strong>Virtual DOM</strong>:vue的虚拟Dom树。<br><strong>Diff</strong>:vue的diff算法，内部实现很复杂，算出数据变动视图需要改变的最小量，再结合patch来更新视图。<br><strong>Patch</strong>:负责把这些虚拟DOM真正施加到真实的DOM上。可以参考这位大神的文章（<img src="https://segmentfault.com/a/1190000008291645" alt="vue">）;  </p>
+</code></pre><p>上面被编译的就是我们的.vue文件，最终还是会被编译成这样的render函数。<br><strong>Virtual DOM</strong>:vue的虚拟Dom树。<br><strong>Diff</strong>:vue的diff算法，内部实现很复杂，算出数据变动视图需要改变的最小量，再结合patch来更新视图。<br><strong>Patch</strong>:负责把这些虚拟DOM真正施加到真实的DOM上。  </p>
 <h2 id="vue的渲染机制"><a href="#vue的渲染机制" class="headerlink" title="vue的渲染机制"></a>vue的渲染机制</h2><h3 id="vue的构建模式"><a href="#vue的构建模式" class="headerlink" title="vue的构建模式"></a>vue的构建模式</h3><p><strong>独立构建</strong> ：包含了模板编译器，渲染过程 HTML字符串-&gt;render()-&gt;VNode-&gt;真实的DOM节点。<br><strong>运行时构建</strong>：不包含模板编译器，渲染过程 render()-&gt;VNode-&gt;真实的DOM节点。<br>独立构建可以理解为  </p>
 <p><img src="../../../../img/vue_render2.png" alt="vue_render"><br>再看下运行时构建  </p>
 <p><img src="../../../../img/mount.png" alt="vue_render"><br>可以看出，在有三种渲染模式，分别是自定义的render()、template、el。<br><strong>el的写法</strong>    </p>

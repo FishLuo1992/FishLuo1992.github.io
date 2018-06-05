@@ -91,10 +91,9 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fishluo1992.github.io/img/vue_rendertree.png">
 <meta property="og:image" content="http://fishluo1992.github.io/img/ast.png">
-<meta property="og:image" content="https://segmentfault.com/a/1190000008291645">
 <meta property="og:image" content="http://fishluo1992.github.io/img/vue_render2.png">
 <meta property="og:image" content="http://fishluo1992.github.io/img/mount.png">
-<meta property="og:updated_time" content="2018-06-05T07:38:16.117Z">
+<meta property="og:updated_time" content="2018-06-05T07:41:13.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue的render函数">
 <meta name="twitter:description" content="基本概念如果需要用vue来编写一些可复用的组件，那么就需要深入了解vue的render函数了。先了解下vue的渲染流程可以看出，模板通过编译生成AST，再由AST生成vue的render函数，render函数结合数据生成了Vitual DOM(可以看我的上一篇文章!),再由vue的diff算法和patch函数后更新视图。AST：抽象语法树。render函数：用来生成Vnode，vue是推荐使用模板">
@@ -379,7 +378,7 @@
                 }
                 _vm.searchItem($event)
               },
-</code></pre><p>上面被编译的就是我们的.vue文件，最终还是会被编译成这样的render函数。<br><strong>Virtual DOM</strong>:vue的虚拟Dom树。<br><strong>Diff</strong>:vue的diff算法，内部实现很复杂，算出数据变动视图需要改变的最小量，再结合patch来更新视图。<br><strong>Patch</strong>:负责把这些虚拟DOM真正施加到真实的DOM上。可以参考这位大神的文章（<img src="https://segmentfault.com/a/1190000008291645" alt="vue">）;  </p>
+</code></pre><p>上面被编译的就是我们的.vue文件，最终还是会被编译成这样的render函数。<br><strong>Virtual DOM</strong>:vue的虚拟Dom树。<br><strong>Diff</strong>:vue的diff算法，内部实现很复杂，算出数据变动视图需要改变的最小量，再结合patch来更新视图。<br><strong>Patch</strong>:负责把这些虚拟DOM真正施加到真实的DOM上。  </p>
 <h2 id="vue的渲染机制"><a href="#vue的渲染机制" class="headerlink" title="vue的渲染机制"></a>vue的渲染机制</h2><h3 id="vue的构建模式"><a href="#vue的构建模式" class="headerlink" title="vue的构建模式"></a>vue的构建模式</h3><p><strong>独立构建</strong> ：包含了模板编译器，渲染过程 HTML字符串-&gt;render()-&gt;VNode-&gt;真实的DOM节点。<br><strong>运行时构建</strong>：不包含模板编译器，渲染过程 render()-&gt;VNode-&gt;真实的DOM节点。<br>独立构建可以理解为  </p>
 <p><img src="../../../../img/vue_render2.png" alt="vue_render"><br>再看下运行时构建  </p>
 <p><img src="../../../../img/mount.png" alt="vue_render"><br>可以看出，在有三种渲染模式，分别是自定义的render()、template、el。<br><strong>el的写法</strong>    </p>
