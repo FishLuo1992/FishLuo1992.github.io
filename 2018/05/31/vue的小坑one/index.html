@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fishluo1992.github.io/img/project_1.png">
 <meta property="og:image" content="http://fishluo1992.github.io/img/project_2.png">
-<meta property="og:updated_time" content="2018-05-31T02:54:41.792Z">
+<meta property="og:updated_time" content="2018-06-01T09:33:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="奇怪的流程">
 <meta name="twitter:description" content="起源  这是上一个项目了，公司内部的OA系统，页面近30个了，由我这个前端和一个java大神完成。总体时间也近两个月，接口的调试时间也占了很多，因为数据逻辑的耦合度太高了。  下面谈谈一其中的个小需求吧！看图！       就是这种审批流程图，看起来比一般的线流程图多了一点样式。因为项目的模块不少，每个模块都有不同的审批流程，像这样         解剖一下   每个模块多个流程都需要看到这个流程">
@@ -381,7 +381,7 @@ border-left: 5px solid #878787;
      }
  }
 </code></pre><p>因为一个模块内的每个流程都需要这个显示，所有需要watch一下保证数据完美的显示。  </p>
-<p>##问题来了<br>数据有了，基本页面也完美展示了，那通过数据该咋渲染呢？<br>嗯，这个也不难。用来控制Class来控制就好，像这样  </p>
+<h2 id="问题来了"><a href="#问题来了" class="headerlink" title="问题来了"></a>问题来了</h2><p>数据有了，基本页面也完美展示了，那通过数据该咋渲染呢？<br>嗯，这个也不难。用来控制Class来控制就好，像这样  </p>
 <pre><code>:class=&quot;step_t?&apos;ctrl-step-rebut&apos;:&apos;&apos;&quot;   
 </code></pre><p>是的这样可以控制两种，那这里有三种咋控制呢？这样？  </p>
 <pre><code>:class=&quot;stepTwo?&apos;ctrl-first-right-writhe&apos;:(stepOne?&apos;ctrl-first-right-son&apos;:&apos;&apos;)&quot;  
@@ -528,7 +528,7 @@ border-left: 5px solid #878787;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -581,7 +581,7 @@ border-left: 5px solid #878787;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#起源"><span class="nav-number">1.</span> <span class="nav-text">起源</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解剖一下"><span class="nav-number"></span> <span class="nav-text">解剖一下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#起源"><span class="nav-number">1.</span> <span class="nav-text">起源</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解剖一下"><span class="nav-number"></span> <span class="nav-text">解剖一下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题来了"><span class="nav-number"></span> <span class="nav-text">问题来了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></div>
             
 
           </div>

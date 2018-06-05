@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fishluo1992.github.io/img/vue_prototype.jpg">
 <meta property="og:image" content="http://fishluo1992.github.io/img/vue_mvvm.png">
-<meta property="og:updated_time" content="2018-06-01T09:12:52.942Z">
+<meta property="og:updated_time" content="2018-06-05T03:13:29.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue的MVVM">
 <meta name="twitter:description" content="人生时苦，所以要做一个简单的人，常想一二，不思八九，越活越带感。   vue响应式原理用过vue写过项目或者看过vue的同学在被问到“vue的响应式原理时”可能都会直接说：  Vue 是通过Object.defineProperty方法把data对象的全部属性转化成getter/setter，当属性被访问或者被修改时通知变化。   Object.defineProperty的API的定义？这个就是">
@@ -337,10 +337,10 @@
       
         <p>人生时苦，所以要做一个简单的人，<br>常想一二，不思八九，<br>越活越带感。  </p>
 <h2 id="vue响应式原理"><a href="#vue响应式原理" class="headerlink" title="vue响应式原理"></a>vue响应式原理</h2><p>用过vue写过项目或者看过vue的同学在被问到“vue的响应式原理时”可能都会直接说：  Vue 是通过Object.defineProperty方法把data对象的全部属性转化成getter/setter，当属性被访问或者被修改时通知变化。  </p>
-<p>Object.defineProperty的API的定义？这个就是ES5改变属性的值的一个API！这么回答肯定是有问题的，MDN的定义是：<br><em>Object.defineProperty()方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回这个对象。</em><br>再看vue官网介绍的响应式原理图。<br><img src="../../../../img/vue_prototype.jpg" alt="vue"><br> 首先通过渲染触发了Data的getter进行依赖收集，源码里有个一Deps订阅者，在数据变化时会通知所有的Watcher观察者，也就是说，在data变化时会触发它的setter，setter通知Watcher，Watcher通知组件执行Render Function，函数内再根据diff算法来实现视图的更新（render函数会根据内部的VDOM，也就是vue的虚拟DOM生成DOM树，diff就是新VDOM树与旧VDOM树进行深度对比(vue源码是比较新旧两个列表的vm的数据状态)，算出施加到真实DOM上的改动，然后通过createDocumentFragment创建对应的node节点）。  </p>
+<p>Object.defineProperty的API的定义？这个就是ES5改变属性的值的一个API！这么回答肯定是有问题的，MDN的定义是：<br><em>Object.defineProperty()方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回这个对象。</em><br>再看vue官网介绍的响应式原理图。<br><img src="../../../../img/vue_prototype.jpg" alt="vue"><br> 首先通过渲染触发了Data的getter进行依赖收集，源码里有个一Deps订阅者，在数据变化时会通知所有的Watcher观察者，也就是说，在data变化时会触发它的setter，setter通知Watcher，Watcher通知组件执行Render Function，函数内再根据diff算法来实现视图的更新（render函数会根据内部的VNode，也就是vue的虚拟DOM生成DOM树，diff就是新VNode节点与旧VNode节点进行深度对比(vue源码是比较新旧两个列表的vm的数据状态)，算出施加到真实DOM上最小的改动，然后更新视图）。  </p>
 <h2 id="vue的MVVM实现"><a href="#vue的MVVM实现" class="headerlink" title="vue的MVVM实现"></a>vue的MVVM实现</h2><p>再分析vue的MVVM的实现  </p>
 <p><img src="../../../../img/vue_mvvm.png" alt="vue_mvvm"><br>      new MVVM()也就是构造函数Vue的实例 new Vue()，是Vue的入口函数。<br>      Observer 数据监听器，能够对数据对象的所有属性进行监听，如有变动可以通知订阅者。<br>      Watcher 订阅者，作为连接Observer和Compile的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。<br>      Compile 指令解析器，对每个元素节点的指令进行扫描和解析，根据指令模板替换数据和绑定相应的更新数据。<br>      Dep 消息订阅器，Observer内部维护的一个数组，用来收集订阅者Wacher，数据变动触发notify函数，再调用订阅者的update方法。  </p>
-<h3 id="new-MVVM"><a href="#new-MVVM" class="headerlink" title="new MVVM()"></a>new MVVM()</h3><p>vue源码内的英文注释都是尤大大加的，对于英文不好的我只能查字典了。<br>先看vue的<a href="https://github.com/vuejs/vue/blob/dev/src/core/instance/state.js#L107" target="_blank" rel="noopener">initData</a> 这个就是new Vue内初始化的数据，内部将数据进行Observer监听数据变化。    </p>
+<h3 id="new-MVVM"><a href="#new-MVVM" class="headerlink" title="new MVVM()"></a>new MVVM()</h3><p>先看vue的<a href="https://github.com/vuejs/vue/blob/dev/src/core/instance/state.js#L107" target="_blank" rel="noopener">initData</a> 这个就是new Vue内初始化的数据，内部将数据进行Observer监听数据变化。    </p>
 <pre><code>/*初始化data*/
 function initData (vm: Component) {
 
@@ -543,7 +543,7 @@ Dep.prototype = {
 
     notify: function() {
         this.subs.forEach(function(sub) {
-            sub.update();
+            sub.update();  // 视图局部更新 subs[index]
         });
     }
 };
@@ -812,7 +812,7 @@ Dep.prototype = {
   }
 }
 </code></pre><h3 id="Compile"><a href="#Compile" class="headerlink" title="Compile"></a>Compile</h3><p><a href="https://github.com/vuejs/vue/blob/dev/src/compiler/parser/index.js" target="_blank" rel="noopener">Compile</a>也就是指令解析器，这个和一般的模板引擎的区别都不大，大部分通过正则判断内部指令（普通指令和事件指令）。这个就简单说道这里。  </p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>要学到精髓还得多看看源码，看完也可以学到很多。整体架构，逻辑API的依赖等还需要仔细理解学习。<br>再次感谢尤大大！   </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>要学到精髓还得多看看源码，看完也可以学到很多。整体架构，逻辑API的依赖等还需要仔细理解学习。<br>多看源码就对了。  </p>
 
       
     </div>
@@ -852,6 +852,10 @@ Dep.prototype = {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/06/vue的render函数/" rel="prev" title="Vue的render函数">
+                Vue的render函数 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -935,7 +939,7 @@ Dep.prototype = {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
