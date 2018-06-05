@@ -89,17 +89,17 @@
 <meta property="og:site_name" content="fish_need_sea">
 <meta property="og:description" content="基本概念如果需要用vue来编写一些可复用的组件，那么就需要深入了解vue的render函数了。先了解下vue的渲染流程可以看出，模板通过编译生成AST，再由AST生成vue的render函数，render函数结合数据生成了Vitual DOM(可以看我的上一篇文章)，再由vue的diff和patch后更新视图。AST：抽象语法树。render函数：用来生成Vnode，vue是推荐使用模板来构建我们">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://fishluo1992.github.io/img/ast.png">
+<meta property="og:image" content="http://fishluo1992.github.io/img/vue_rendertree.png">
 <meta property="og:image" content="https://fishluo1992.github.io/2018/06/01/vue%E7%9A%84%E7%90%86%E8%A7%A3/">
-<meta property="og:image" content="http://fishluo1992.github.io/img/vue_renderFn.png">
+<meta property="og:image" content="http://fishluo1992.github.io/img/ast.png">
 <meta property="og:image" content="https://segmentfault.com/a/1190000008291645">
 <meta property="og:image" content="http://fishluo1992.github.io/img/vue_render2.png">
 <meta property="og:image" content="http://fishluo1992.github.io/img/mount.png">
-<meta property="og:updated_time" content="2018-06-05T07:30:37.077Z">
+<meta property="og:updated_time" content="2018-06-05T07:36:50.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue的render函数">
 <meta name="twitter:description" content="基本概念如果需要用vue来编写一些可复用的组件，那么就需要深入了解vue的render函数了。先了解下vue的渲染流程可以看出，模板通过编译生成AST，再由AST生成vue的render函数，render函数结合数据生成了Vitual DOM(可以看我的上一篇文章)，再由vue的diff和patch后更新视图。AST：抽象语法树。render函数：用来生成Vnode，vue是推荐使用模板来构建我们">
-<meta name="twitter:image" content="http://fishluo1992.github.io/img/ast.png">
+<meta name="twitter:image" content="http://fishluo1992.github.io/img/vue_rendertree.png">
 
 
 
@@ -339,7 +339,7 @@
       
 
       
-        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>如果需要用vue来编写一些可复用的组件，那么就需要深入了解vue的render函数了。先了解下vue的渲染流程<br><img src="../../../../img/ast.png" alt="ast"><br>可以看出，模板通过编译生成AST，再由AST生成vue的render函数，render函数结合数据生成了Vitual DOM(可以看我的上一篇文章<img src="https://fishluo1992.github.io/2018/06/01/vue%E7%9A%84%E7%90%86%E8%A7%A3/" alt="vue的理解">)，再由vue的diff和patch后更新视图。<br><strong>AST</strong>：抽象语法树。<br><img src="../../../../img/vue_renderFn.png" alt="vue_renderFn"><br><strong>render函数</strong>：用来生成Vnode，vue是推荐使用模板来构建我们的应用界面，但底层还是会将模板编译成render函数。跑vue项目，在浏览器查看文件，我们可以看到模板编译成render的样子。   </p>
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>如果需要用vue来编写一些可复用的组件，那么就需要深入了解vue的render函数了。先了解下vue的渲染流程<br><img src="../../../../img/vue_rendertree.png" alt="vue_renderFn"><br>可以看出，模板通过编译生成AST，再由AST生成vue的render函数，render函数结合数据生成了Vitual DOM(可以看我的上一篇文章<img src="https://fishluo1992.github.io/2018/06/01/vue%E7%9A%84%E7%90%86%E8%A7%A3/" alt="vue的理解">)，再由vue的diff和patch后更新视图。<br><strong>AST</strong>：抽象语法树。<br><img src="../../../../img/ast.png" alt="ast"><br><strong>render函数</strong>：用来生成Vnode，vue是推荐使用模板来构建我们的应用界面，但底层还是会将模板编译成render函数。跑vue项目，在浏览器查看文件，我们可以看到模板编译成render的样子。   </p>
 <pre><code>var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -556,7 +556,7 @@ Vue.component(&apos;custom-element&apos;,
 <pre><code>let app = new Vue({
     el: &apos;#app&apos;
 })  
-</code></pre><p>这样就很好理解了，render函数不需要编译生成AST。<br>render函数结合上面我们给的数据直接生成vitual DOM,再由vue的diff和patch映射到真实DOM上，跟新视图。</p>
+</code></pre><p>这样就很好理解了，render函数不需要编译生成AST。<br>render函数结合上面我们给的数据直接生成vitual DOM,再由vue的diff和patch映射到真实DOM上，更新视图。</p>
 
       
     </div>
