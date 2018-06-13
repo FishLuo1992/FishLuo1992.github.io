@@ -81,20 +81,20 @@
 
 
 
-<meta name="description" content="原型链图(先上图)   图片网上找的… 原理原型链的继承大家都知道面向对象有三大基本特性 ：封装、继承、多态。继承是指让某个类型的对象获得另一个类型的对象的属性和方法。而原型和原型链是Javascript实现继承的一种模型。原型链的基本思想就是利用原型让一个引用类型继承另一个引用类型的属性和方法。原型链的构建是通过将一个类型的实例赋值给另一个构造函数的原型实现的。Javascript在创建对象的时">
+<meta name="description" content="浏览器的多线程这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。  GUI线程职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。   JS引擎线程职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原型链的继承">
-<meta property="og:url" content="http://fishluo1992.github.io/2018/05/28/原型链/index.html">
+<meta property="og:title" content="JS的事件循环">
+<meta property="og:url" content="http://fishluo1992.github.io/2018/06/13/浏览的事件循环/index.html">
 <meta property="og:site_name" content="fish_need_sea">
-<meta property="og:description" content="原型链图(先上图)   图片网上找的… 原理原型链的继承大家都知道面向对象有三大基本特性 ：封装、继承、多态。继承是指让某个类型的对象获得另一个类型的对象的属性和方法。而原型和原型链是Javascript实现继承的一种模型。原型链的基本思想就是利用原型让一个引用类型继承另一个引用类型的属性和方法。原型链的构建是通过将一个类型的实例赋值给另一个构造函数的原型实现的。Javascript在创建对象的时">
+<meta property="og:description" content="浏览器的多线程这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。  GUI线程职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。   JS引擎线程职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://fishluo1992.github.io/img/prototype_img.png">
-<meta property="og:updated_time" content="2018-06-01T09:33:23.616Z">
+<meta property="og:image" content="http://fishluo1992.github.io/img/bower.png">
+<meta property="og:updated_time" content="2018-06-13T02:24:29.295Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原型链的继承">
-<meta name="twitter:description" content="原型链图(先上图)   图片网上找的… 原理原型链的继承大家都知道面向对象有三大基本特性 ：封装、继承、多态。继承是指让某个类型的对象获得另一个类型的对象的属性和方法。而原型和原型链是Javascript实现继承的一种模型。原型链的基本思想就是利用原型让一个引用类型继承另一个引用类型的属性和方法。原型链的构建是通过将一个类型的实例赋值给另一个构造函数的原型实现的。Javascript在创建对象的时">
-<meta name="twitter:image" content="http://fishluo1992.github.io/img/prototype_img.png">
+<meta name="twitter:title" content="JS的事件循环">
+<meta name="twitter:description" content="浏览器的多线程这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。  GUI线程职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。   JS引擎线程职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致">
+<meta name="twitter:image" content="http://fishluo1992.github.io/img/bower.png">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://fishluo1992.github.io/2018/05/28/原型链/"/>
+  <link rel="canonical" href="http://fishluo1992.github.io/2018/06/13/浏览的事件循环/"/>
 
 
 
 
 
-  <title>原型链的继承 | fish_need_sea</title>
+  <title>JS的事件循环 | fish_need_sea</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fishluo1992.github.io/2018/05/28/原型链/">
+    <link itemprop="mainEntityOfPage" href="http://fishluo1992.github.io/2018/06/13/浏览的事件循环/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="没尾巴的鱼">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">原型链的继承</h1>
+          <h1 class="post-title" itemprop="name headline">JS的事件循环</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-28T18:33:28+08:00">
-                2018-05-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T00:00:00+08:00">
+                2018-06-13
               </time>
             
 
@@ -334,14 +334,43 @@
       
 
       
-        <h2 id="原型链图-先上图"><a href="#原型链图-先上图" class="headerlink" title="原型链图(先上图)"></a>原型链图(先上图)</h2><p><img src="../../../../img/prototype_img.png" alt="js原型链">  </p>
-<p>图片网上找的…</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="原型链的继承"><a href="#原型链的继承" class="headerlink" title="原型链的继承"></a>原型链的继承</h3><p>大家都知道面向对象有三大基本特性 ：封装、继承、多态。<br>继承是指让某个类型的对象获得另一个类型的对象的属性和方法。<br>而原型和原型链是Javascript实现继承的一种模型。<br>原型链的基本思想就是利用原型让一个引用类型继承另一个引用类型的属性和方法。原型链的构建是通过将一个类型的实例赋值给另一个构造函数的原型实现的。<br>Javascript在创建对象的时候，都有一个叫做<strong>proto</strong>的内置属性，用于指向创建它的构造函数的原型对象，也就是图片上的prototype（这个属性指向原型对象，只有函数才有）。<br>每个对象都有<code>__proto__</code>属性，指向所继承的上层对象，最顶级是null;<br>从图上看，可以看到null的上一个指针是指向Object.prototype,也就是说,可以把Object看做是一个构造函数(其实它就是一个内置的构造函数)，其他的方法就是基于这个类型继承而来的。<br><code>var a = [];//这个同等于 var a = new Array();    
-    var b = {}; // 同等于 var b = new Object();    
-    console.log(a.__proto__ === Array.prototype) // true    
-    console.log(b.__proto__ === Object.prototype) // true</code><br>我们发现a和b都有<code>__proto__</code>，分别指向了Array.prototype和Object.prototype。其实a,b都是内置的构造函数的实例对象，都基于类型分别继承了构造函数的prtotype。 </p>
-<p>平常写的时候感觉很正常，其实像Array、Object这样的函数内置对象还有 Date、Function、RegExp、Json、Math。 </p>
-<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>只要创建一个新函数，就会根据规则给这个函数创建一个prototype属性，这个属性指向函数的原型对象。<br>也可以这样理解，所有函数对象都指向Function.prototype，都是Function的实例。<br><code>function Fn(){}  console.log(Fn.__proto__ === Function.prototype) //true</code><br>也就是说，<code>__proto__</code>存在于实例与构造函数原型对象之间，而不是存在于实例与构造函数之间。也可以理解为原型链的形成主要还是看<code>__proto__</code>，而不是prototype。<br>趁项目做完，忙里偷闲弄下博客（以前的总结都在txt里，哈哈）。  </p>
+        <h2 id="浏览器的多线程"><a href="#浏览器的多线程" class="headerlink" title="浏览器的多线程"></a>浏览器的多线程</h2><p>这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。<br><img src="../../../../img/bower.png" alt="vue_renderFn"> </p>
+<h4 id="GUI线程"><a href="#GUI线程" class="headerlink" title="GUI线程"></a>GUI线程</h4><p>职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。  </p>
+<h4 id="JS引擎线程"><a href="#JS引擎线程" class="headerlink" title="JS引擎线程"></a>JS引擎线程</h4><p>职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致页面渲染速度变慢。所以一般把JS放在html页尾。当解析html时，如果页面有JS的引入，JS引擎会把JS全部执行一遍，执行完毕后，GUI线程才会继续执行。  </p>
+<h4 id="事件触发线程"><a href="#事件触发线程" class="headerlink" title="事件触发线程"></a>事件触发线程</h4><p>职责： 事件触发时，负责把事件放入队列，等待特定的触发条件时再执行。  </p>
+<h4 id="定时器线程"><a href="#定时器线程" class="headerlink" title="定时器线程"></a>定时器线程</h4><p>职责： 将setTimeout 和 setInteval执行函数在触发时放入队列等待执行。  </p>
+<h4 id="http请求线程"><a href="#http请求线程" class="headerlink" title="http请求线程"></a>http请求线程</h4><p>职责: 监听请求状态变更，将相应函数放入队列，等待执行。</p>
+<h2 id="JS事件循环"><a href="#JS事件循环" class="headerlink" title="JS事件循环"></a>JS事件循环</h2><h4 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h4><p>JS引擎的运行机制分为：<strong>执行栈</strong>和<strong>队列</strong>， JS的代码都在栈中执行，分为<strong>同步执行</strong>和<strong>异步执行</strong>，只有栈内同步代码执行完毕后，才会执行异步代码。 </p>
+<p><strong>JS引擎解析代码规则：</strong><br>1.先把执行栈内的代码都执行一遍。<br>2.在执行的过程中，如果碰到触发事件(点击或者别的事件)、http请求(ajax请求)、延时执行(setTimeout，setInterval)就会依各自的线程进行监听，等待放入队列。<br>3.当执行栈空后，就会循环队列，把需要的代码放入执行栈，执行相应的代码。  </p>
+<p>一道常见的Event Loop 面试题    </p>
+<pre><code>console.log(&apos;script start&apos;);
+const date = new Date();
+setTimeout(() =&gt; {
+    console.log(&apos;setTimeout1&apos; + &apos;------&apos; + (new Date() - date));
+}, 0);
+setTimeout(() =&gt; {
+    console.log(&apos;setTimeout2&apos; + &apos;------&apos; + (new Date() - date));
+},0)
+new Promise((resolve) =&gt; {
+    console.log(&apos;script1&apos;);
+    resolve();
+}).then(function() {
+    console.log(&apos;script 2&apos;);
+}).then(function() {
+    console.log(&apos;script 3&apos;);
+})
+
+console.log(&apos;script end&apos;);    
+</code></pre><p>直接看答案吧     </p>
+<pre><code>script start 
+ script1  
+script end  
+script 2  
+script 3  
+setTimeout1------6 
+setTimeout2------8  // 这里可能每次的值都不一样  
+</code></pre><p>在解释结果前还需要了解一下JS引擎在解析JS代码时，会把任务源分为：<strong>微任务</strong>和<strong>宏任务</strong>；微任务包括：promise的回调、Object.observe，宏任务有：JS、setTimeout、setIntterval;<br>JS的设计是单线程的，在执行任务时，会把JS栈从头到尾依次解析，当碰到微任务和宏任务时，会把他们放入队列，等待执行。在清空栈后，就会去队列先把微任务一次放入栈内执行。当把JS栈和第一次执行产生的微任务执行完毕后就会把队列的宏任务拿出放入执行栈，依次执行，执行完后再循环。这样的执行顺序就叫事件循环，也就是Event Loop;结合线程的理解会更容易也会更深刻。  </p>
+<p>然后再看上面的那道题，会不会瞬间感觉清洗脱俗。现在再来解析下答案。<br>1.JS是单线程的（为了解决一些操作DOM会产生无法描述的顺序问题等），代码一次执行，所以第一个输出 script start;<br>2.解析碰到setTimeout，这个属于宏任务，放入队列，等待下一次循环再执行。<br>3.promise会先输出同步的 script1 ，then的回调是微任务，放入执行队列。<br>4.输出 script end ;<br>到了这里就已经清空了一次任务栈，然后开始查找微任务。<br>5.把微任务的任务放入执行栈执行，输出script2,再输出回调的script3。<br>6.队列的微任务已清空完毕，开始下一次事件循环，把队列的宏任务放入执行栈内执行，输出第一个setTimeout1,setTimeout源码规定了最小值为4ms，所以不论执行速度，执行的结果最短都大于4ms。再输出setTimeout2.<br>整个事件执行完毕。还有一点，执行的顺序都会被线程监听。如我们平常所用的观察者模式一样，每个被放入队列的事件都会被打上标记，下次执行就不会乱。  </p>
 
       
     </div>
@@ -372,15 +401,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/06/06/vue的render函数/" rel="next" title="Vue的render函数">
+                <i class="fa fa-chevron-left"></i> Vue的render函数
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/31/vue的小坑one/" rel="prev" title="奇怪的流程">
-                奇怪的流程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -517,7 +546,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原型链图-先上图"><span class="nav-number">1.</span> <span class="nav-text">原型链图(先上图)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原型链的继承"><span class="nav-number">2.1.</span> <span class="nav-text">原型链的继承</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">3.</span> <span class="nav-text">构造函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器的多线程"><span class="nav-number">1.</span> <span class="nav-text">浏览器的多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GUI线程"><span class="nav-number">1.0.1.</span> <span class="nav-text">GUI线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS引擎线程"><span class="nav-number">1.0.2.</span> <span class="nav-text">JS引擎线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件触发线程"><span class="nav-number">1.0.3.</span> <span class="nav-text">事件触发线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定时器线程"><span class="nav-number">1.0.4.</span> <span class="nav-text">定时器线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求线程"><span class="nav-number">1.0.5.</span> <span class="nav-text">http请求线程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS事件循环"><span class="nav-number">2.</span> <span class="nav-text">JS事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件循环"><span class="nav-number">2.0.1.</span> <span class="nav-text">事件循环</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

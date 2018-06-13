@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fishluo1992.github.io/"/>
-  <updated>2018-06-05T07:41:13.301Z</updated>
+  <updated>2018-06-13T02:24:29.295Z</updated>
   <id>http://fishluo1992.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS的事件循环</title>
+    <link href="http://fishluo1992.github.io/2018/06/13/%E6%B5%8F%E8%A7%88%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"/>
+    <id>http://fishluo1992.github.io/2018/06/13/浏览的事件循环/</id>
+    <published>2018-06-12T16:00:00.000Z</published>
+    <updated>2018-06-13T02:24:29.295Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="浏览器的多线程"><a href="#浏览器的多线程" class="headerlink" title="浏览器的多线程"></a>浏览器的多线程</h2><p>这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。<br><img src="../../../../img/bower.png" alt="vue_renderFn"> </p><h4 id="GUI线程"><a href="#GUI线程" class="headerlink" title="GUI线程"></a>GUI线程</h4><p>职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。  </p><h4 id="JS引擎线程"><a href="#JS引擎线程" class="headerlink" title="JS引擎线程"></a>JS引擎线程</h4><p>职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致页面渲染速度变慢。所以一般把JS放在html页尾。当解析html时，如果页面有JS的引入，JS引擎会把JS全部执行一遍，执行完毕后，GUI线程才会继续执行。  </p><h4 id="事件触发线程"><a href="#事件触发线程" class="headerlink" title="事件触发线程"></a>事件触发线程</h4><p>职责： 事件触发时，负责把事件放入队列，等待特定的触发条件时再执行。  </p><h4 id="定时器线程"><a href="#定时器线程" class="headerlink" title="定时器线程"></a>定时器线程</h4><p>职责： 将setTimeout 和 setInteval执行函数在触发时放入队列等待执行。  </p><h4 id="http请求线程"><a href="#http请求线程" class="headerlink" title="http请求线程"></a>http请求线程</h4><p>职责: 监听请求状态变更，将相应函数放入队列，等待执行。</p><h2 id="JS事件循环"><a href="#JS事件循环" class="headerlink" title="JS事件循环"></a>JS事件循环</h2><h4 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h4><p>JS引擎的运行机制分为：<strong>执行栈</strong>和<strong>队列</strong>， JS的代码都在栈中执行，分为<strong>同步执行</strong>和<strong>异步执行</strong>，只有栈内同步代码执行完毕后，才会执行异步代码。 </p><p><strong>JS引擎解析代码规则：</strong><br>1.先把执行栈内的代码都执行一遍。<br>2.在执行的过程中，如果碰到触发事件(点击或者别的事件)、http请求(ajax请求)、延时执行(setTimeout，setInterval)就会依各自的线程进行监听，等待放入队列。<br>3.当执行栈空后，就会循环队列，把需要的代码放入执行栈，执行相应的代码。  </p><p>一道常见的Event Loop 面试题    </p><pre><code>console.log(&apos;script start&apos;);const date = new Date();setTimeout(() =&gt; {    console.log(&apos;setTimeout1&apos; + &apos;------&apos; + (new Date() - date));}, 0);setTimeout(() =&gt; {    console.log(&apos;setTimeout2&apos; + &apos;------&apos; + (new Date() - date));},0)new Promise((resolve) =&gt; {    console.log(&apos;script1&apos;);    resolve();}).then(function() {    console.log(&apos;script 2&apos;);}).then(function() {    console.log(&apos;script 3&apos;);})console.log(&apos;script end&apos;);    </code></pre><p>直接看答案吧     </p><pre><code>script start  script1  script end  script 2  script 3  setTimeout1------6 setTimeout2------8  // 这里可能每次的值都不一样  </code></pre><p>在解释结果前还需要了解一下JS引擎在解析JS代码时，会把任务源分为：<strong>微任务</strong>和<strong>宏任务</strong>；微任务包括：promise的回调、Object.observe，宏任务有：JS、setTimeout、setIntterval;<br>JS的设计是单线程的，在执行任务时，会把JS栈从头到尾依次解析，当碰到微任务和宏任务时，会把他们放入队列，等待执行。在清空栈后，就会去队列先把微任务一次放入栈内执行。当把JS栈和第一次执行产生的微任务执行完毕后就会把队列的宏任务拿出放入执行栈，依次执行，执行完后再循环。这样的执行顺序就叫事件循环，也就是Event Loop;结合线程的理解会更容易也会更深刻。  </p><p>然后再看上面的那道题，会不会瞬间感觉清洗脱俗。现在再来解析下答案。<br>1.JS是单线程的（为了解决一些操作DOM会产生无法描述的顺序问题等），代码一次执行，所以第一个输出 script start;<br>2.解析碰到setTimeout，这个属于宏任务，放入队列，等待下一次循环再执行。<br>3.promise会先输出同步的 script1 ，then的回调是微任务，放入执行队列。<br>4.输出 script end ;<br>到了这里就已经清空了一次任务栈，然后开始查找微任务。<br>5.把微任务的任务放入执行栈执行，输出script2,再输出回调的script3。<br>6.队列的微任务已清空完毕，开始下一次事件循环，把队列的宏任务放入执行栈内执行，输出第一个setTimeout1,setTimeout源码规定了最小值为4ms，所以不论执行速度，执行的结果最短都大于4ms。再输出setTimeout2.<br>整个事件执行完毕。还有一点，执行的顺序都会被线程监听。如我们平常所用的观察者模式一样，每个被放入队列的事件都会被打上标记，下次执行就不会乱。  </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;浏览器的多线程&quot;&gt;&lt;a href=&quot;#浏览器的多线程&quot; class=&quot;headerlink&quot; title=&quot;浏览器的多线程&quot;&gt;&lt;/a&gt;浏览器的多线程&lt;/h2&gt;&lt;p&gt;这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是
+      
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://fishluo1992.github.io/tags/JS/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue的render函数</title>
