@@ -90,7 +90,7 @@
 <meta property="og:description" content="浏览器的多线程这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。  GUI线程职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。   JS引擎线程职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fishluo1992.github.io/img/bower.png">
-<meta property="og:updated_time" content="2018-06-14T06:27:37.974Z">
+<meta property="og:updated_time" content="2018-06-14T06:44:42.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS的事件循环">
 <meta name="twitter:description" content="浏览器的多线程这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。  GUI线程职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。   JS引擎线程职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致">
@@ -165,7 +165,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">no one</p>
+        <p class="site-subtitle">18720090169@163.com</p>
       
   </div>
 
@@ -370,7 +370,8 @@ script 3
 setTimeout1------6 
 setTimeout2------8  // 这里可能每次的值都不一样  
 </code></pre><p>在解释结果前还需要了解一下。JS引擎在解析JS代码时，会把任务源分为：<strong>微任务</strong>和<strong>宏任务</strong>；微任务包括：promise的回调、Object.observe，宏任务有：JS、setTimeout、setIntterval;<br>JS的设计是单线程的，在执行任务时，会把JS从头到尾依次解析，当碰到微任务和宏任务时，会把他们放入队列，等待执行。JS还在执行，在执行完后，就会去队列先把微任务依次放入栈内执行。这就是第一次循环，当把第一次执行产生的微任务执行完毕后就会把队列的宏任务拿出放入执行栈，依次执行，执行完后再循环。这样的执行顺序就叫事件循环，也就是Event Loop;结合线程的理解会更容易也会更深刻，所以即使setTimeout的延时设置为0，但他属于宏任务，等JS和微任务都执行完毕后的下一个事件循环才会执行。</p>
-<p>然后再看上面的那道题，会不会瞬间感觉清洗脱俗。现在再来解析下答案。<br>1.JS是单线程的（为了解决一些操作DOM会产生无法描述的顺序问题等），代码依次执行，所以第一个输出 script start;<br>2.解析碰到setTimeout，这个属于宏任务，放入队列，等待下一次循环再执行。<br>3.promise会先输出同步的 script1 ，then的回调是微任务，放入执行队列。<br>4.输出 script end ;<br>到了这里就已经清空了一次任务栈，然后开始查找微任务。<br>5.把微任务的任务放入执行栈执行，输出script2,再输出回调的script3。<br>6.队列的微任务已清空完毕，开始下一次事件循环，把队列的宏任务放入执行栈内执行，输出第一个setTimeout1,setTimeout源码规定了最小值为4ms，所以不论执行速度，执行的结果最短都大于4ms。再输出setTimeout2.<br>整个事件执行完毕。还有一点，执行的顺序都会被线程监听。如我们平常所用的观察者模式一样，每个被放入队列的事件都会被打上标记，下次执行就不会乱。  </p>
+<p>然后再看上面的那道题，会不会瞬间感觉清洗脱俗。现在再来解析下答案。<br>1.JS是单线程的（为了解决一些操作DOM会产生无法描述的顺序问题等），代码依次执行，所以第一个输出 script start;<br>2.解析碰到setTimeout，这个属于宏任务，放入队列，等待下一次循环再执行。<br>3.promise会先输出同步的 script1 ，then的回调是微任务，放入执行队列。<br>4.输出 script end ;<br>到了这里就已经清空了一次任务栈，然后开始查找微任务。<br>5.把微任务的任务放入执行栈执行，输出script2,再输出回调的script3。<br>6.队列的微任务已清空完毕，开始下一次事件循环，把队列的宏任务放入执行栈内执行，输出第一个setTimeout1,setTimeout源码规定了最小值为4ms，所以不论执行速度，执行的结果最短都大于4ms。再输出setTimeout2.<br>整个事件执行完毕。  </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>1.结合浏览器的线程来理解会更明白一点。<br>2.JS的执行会被线程监听。如我们平常所用的观察者模式一样，每个被放入队列的事件都会被打上标记，比如ajax请求会被http线程监听，也就是当发起一个请求后，http属于pedding状态，当数据返回或者请求错误时，http线程会把结果返回，Event Loop当次循环到这个事件，放入栈内执行ajax回调，把结果返回。<br>3.如果需要更深层次的I/O事件，需要了解浏览器的JS引擎，先埋个点。  </p>
 
       
     </div>
@@ -546,7 +547,7 @@ setTimeout2------8  // 这里可能每次的值都不一样
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器的多线程"><span class="nav-number">1.</span> <span class="nav-text">浏览器的多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GUI线程"><span class="nav-number">1.0.1.</span> <span class="nav-text">GUI线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS引擎线程"><span class="nav-number">1.0.2.</span> <span class="nav-text">JS引擎线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件触发线程"><span class="nav-number">1.0.3.</span> <span class="nav-text">事件触发线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定时器线程"><span class="nav-number">1.0.4.</span> <span class="nav-text">定时器线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求线程"><span class="nav-number">1.0.5.</span> <span class="nav-text">http请求线程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS事件循环"><span class="nav-number">2.</span> <span class="nav-text">JS事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件循环"><span class="nav-number">2.0.1.</span> <span class="nav-text">事件循环</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器的多线程"><span class="nav-number">1.</span> <span class="nav-text">浏览器的多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GUI线程"><span class="nav-number">1.0.1.</span> <span class="nav-text">GUI线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS引擎线程"><span class="nav-number">1.0.2.</span> <span class="nav-text">JS引擎线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件触发线程"><span class="nav-number">1.0.3.</span> <span class="nav-text">事件触发线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定时器线程"><span class="nav-number">1.0.4.</span> <span class="nav-text">定时器线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求线程"><span class="nav-number">1.0.5.</span> <span class="nav-text">http请求线程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS事件循环"><span class="nav-number">2.</span> <span class="nav-text">JS事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件循环"><span class="nav-number">2.0.1.</span> <span class="nav-text">事件循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
