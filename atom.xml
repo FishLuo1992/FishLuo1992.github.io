@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fishluo1992.github.io/"/>
-  <updated>2018-06-14T06:44:42.497Z</updated>
+  <updated>2018-08-09T12:09:06.177Z</updated>
   <id>http://fishluo1992.github.io/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React+Dva的路</title>
+    <link href="http://fishluo1992.github.io/2018/07/28/React+Dva%E4%B9%8B%E8%B7%AF/"/>
+    <id>http://fishluo1992.github.io/2018/07/28/React+Dva之路/</id>
+    <published>2018-07-28T12:35:00.000Z</published>
+    <updated>2018-08-09T12:09:06.177Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://fishluo1992.github.io/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在框架中使用的一些设计模式</title>
+    <link href="http://fishluo1992.github.io/2018/07/25/%E5%9C%A8%E6%A1%86%E6%9E%B6%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://fishluo1992.github.io/2018/07/25/在框架中使用设计模式/</id>
+    <published>2018-07-25T12:08:00.000Z</published>
+    <updated>2018-08-09T12:08:44.675Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>在框架中使用设计模式</strong></p><p> <strong><em>框架的封装内部就有很多设计模式，比如Vue的订阅者观察模式等。API开放的都很好，使用者可以直接调用暴露的方法来解决日常的业务需求。<br>如果项目比较大，内部的模块很多，需要达到复用优化的效果，这时就需要使用一些设计模式来解决问题了。</em></strong></p><p><strong>一、 构造函数模式的使用</strong><br>    <strong><em>这个相对于大多数的业务场景都有用到，像一般的弹窗、提示一类的组件都用到了构造函数模式</em></strong>。<br>构造函数模式 是封装了一个类（也可以理解一个方法），内部通过this来管理自己的数据和方法，并return 需要暴露的参数或者方法。直接通过new fn（）来调用实例化对象。生产一个需要的方法。类似 vue封装的一些message，notify函数，内部封装完好，直接return new fn ，我们页不需要再写一遍new。直接调用就可以。<br>这种设计模式比较常规，用起来也是简单粗暴。</p><p><strong>二、 单列模式</strong><br>这个模式也很好理解，就是只返回一个需要的实例，没有 就创建一个实例返回。</p><pre><code>let Single = (function(){ var instance; function init() { //define private methods and properties //do something return { //define public methods and properties }; } return { // 获取实例 getInstance:function(){ if(!instance){ instance = init(); } return instance; } } })(); const obj1 = Single.getInstance(); const obj2 = Single.getInstance(); console.log(obj1 === obj2); </code></pre><p>在平常使用框架时，如果需要在页面只显示或者只需要一个的时候，就可以通过这个设计模式来解决问题。<br>比如移动端的剧中弹窗，就可以通过这种方法来解决。</p><p><strong>三、 混合模式</strong><br>也就是 原型模式（prototype）和 构造函数模式的结合，这个也比较好理解</p><pre><code>import Vue from &apos;vue&apos;;import testTost from &quot;./toast.vue&quot;;const ToastConstructor = Vue.extend(testTost); let toastPool = [];let getAnInstance = () =&gt; {  if (toastPool.length &gt; 0) {    let instance = toastPool[0];    toastPool.splice(0, 1);    return instance;  }  return new ToastConstructor({    el: document.createElement(&apos;div&apos;)  });};let returnAnInstance = instance =&gt; {  if (instance) {    toastPool.push(instance);  }};let removeDom = event =&gt; {  if (event.target.parentNode) {    event.target.parentNode.removeChild(event.target);  }};// toast 的close方法ToastConstructor.prototype.close = function () {  this.visible = false;  this.$el.addEventListener(&apos;transitionend&apos;, removeDom);  this.closed = true;  returnAnInstance(this);};// Toast函数let Toast = (options = {}) =&gt; {  let duration = options.duration || 0;  // 实例对象  let instance = getAnInstance();  instance.closed = false;  clearTimeout(instance.timer); // 清除显示  // 实例的方法  instance.message = typeof options === &apos;string&apos; ? options : options.message;  instance.position = options.position || &apos;&apos;;  instance.className = options.className || &apos;&apos;;  instance.iconSrc = options.iconSrc || {};  // 挂载到body上  document.body.appendChild(instance.$el);  // 保证元素在DOM上  Vue.nextTick(function () {    instance.visible = true;    instance.$el.removeEventListener(&apos;transitionend&apos;, removeDom);    if (duration) {      instance.timer = setTimeout(function () {        if (instance.closed) return;        instance.close();      }, duration);    }  });  return instance;};// 使插件可以全局调用function MineToast() {  Vue.$toast = Vue.prototype.$toast = Toast;}export default MineToast;    </code></pre><p>混合模式中构造函数模式用于定义实例属性,而原型模式用于定义方法和共享属性. 每个实例都会有自己的一份实例属性,但同时又共享这方法,最大限度的节省了内存.另外这种模式还支持传递初始数据.优点胜多,这种模式使用广泛,认同度最高的一种创建自定义对象的方法.</p><p>在这个封装的插件组件内部，运用了混合模式、单例模式。保证了实例的单一，达到需要的效果。 </p><p><strong>四、 动态原型模式</strong><br>动态原型模式将所有信息封装在了构造函数中,而通过构造函数中初始化原型,这个可以通过判断该方法是否有效而选择是否需要初始化原型.<br>可以举一个我组件react项目中的例子。<br>    // fromFactory.js<br>    import {Fld_Type} from ‘../dataTable/fldType’<br>    import CommonField from ‘./commonField’<br>    import ReadField from ‘./readField’<br>    import EnumField from ‘./enumField’<br>    import SingleImage from ‘./singleImage’<br>    import MutilImage from ‘./mutilImage’<br>    import React from ‘react’<br>    import cloneDeep from ‘lodash.clonedeep’</p><pre><code>export function buildEditField(form,name,value,props,viewName,reverse){switch(props.vtype) {    case Fld_Type.type_common:        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})    case Fld_Type.type_read:        return React.createElement(ReadField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})    case Fld_Type.type_queryone:    case Fld_Type.type_querylist:    case Fld_Type.type_enum:        return React.createElement(EnumField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})    case Fld_Type.type_remark:        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})    case Fld_Type.type_date:        if(props.immutability||props.auto){            return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})        }    return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})    case Fld_Type.type_time:        if(props.immutability||props.auto){            return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})        }        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})    case Fld_Type.type_datetime:        if(props.immutability||props.auto){            return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})        }        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})    case Fld_Type.type_singleImage:        return React.createElement(SingleImage,{form:form,name:name,fieldProps:props})    case Fld_Type.type_mutilImage:        return React.createElement(MutilImage,{form:form,name:name,fieldProps:props})    default:        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})    }}</code></pre><p>这些是封装的一些通用的表单子组件，在使用可以直接通过调用函数来构建需求的组件，最终组成一个From表单。    </p><pre><code>const reactElement = buildAddField(form,item[0],item[1],this.props.viewName,{moniterItem:moniterItem});        </code></pre><p>结构很清晰，使用起来也很简单。    </p><p><strong>总结</strong>            </p><p>对于平常的一些模块的封装，需要深刻了解最终需要达到的效果，再来选择最适合的设计模式来解决问题。思想的组织很重要。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;在框架中使用设计模式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; &lt;strong&gt;&lt;em&gt;框架的封装内部就有很多设计模式，比如Vue的订阅者观察模式等。API开放的都很好，使用者可以直接调用暴露的方法来解决日常的业务需求。&lt;br&gt;如果项目比较大，内部的模块很多，需要达
+      
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://fishluo1992.github.io/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue的Toast</title>
+    <link href="http://fishluo1992.github.io/2018/07/06/vue%E7%9A%84Toast%E5%B0%81%E8%A3%85/"/>
+    <id>http://fishluo1992.github.io/2018/07/06/vue的Toast封装/</id>
+    <published>2018-07-06T12:33:28.000Z</published>
+    <updated>2018-07-30T12:33:49.290Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://fishluo1992.github.io/tags/JS/"/>
+    
+  </entry>
   
   <entry>
     <title>JS的事件循环</title>
@@ -114,9 +170,9 @@
     <link href="http://fishluo1992.github.io/2018/05/28/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
     <id>http://fishluo1992.github.io/2018/05/28/原型链/</id>
     <published>2018-05-28T10:33:28.000Z</published>
-    <updated>2018-06-01T09:33:23.616Z</updated>
+    <updated>2018-07-30T12:34:50.013Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="原型链图-先上图"><a href="#原型链图-先上图" class="headerlink" title="原型链图(先上图)"></a>原型链图(先上图)</h2><p><img src="../../../../img/prototype_img.png" alt="js原型链">  </p><p>图片网上找的…</p><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="原型链的继承"><a href="#原型链的继承" class="headerlink" title="原型链的继承"></a>原型链的继承</h3><p>大家都知道面向对象有三大基本特性 ：封装、继承、多态。<br>继承是指让某个类型的对象获得另一个类型的对象的属性和方法。<br>而原型和原型链是Javascript实现继承的一种模型。<br>原型链的基本思想就是利用原型让一个引用类型继承另一个引用类型的属性和方法。原型链的构建是通过将一个类型的实例赋值给另一个构造函数的原型实现的。<br>Javascript在创建对象的时候，都有一个叫做<strong>proto</strong>的内置属性，用于指向创建它的构造函数的原型对象，也就是图片上的prototype（这个属性指向原型对象，只有函数才有）。<br>每个对象都有<code>__proto__</code>属性，指向所继承的上层对象，最顶级是null;<br>从图上看，可以看到null的上一个指针是指向Object.prototype,也就是说,可以把Object看做是一个构造函数(其实它就是一个内置的构造函数)，其他的方法就是基于这个类型继承而来的。<br><code>var a = [];//这个同等于 var a = new Array();        var b = {}; // 同等于 var b = new Object();        console.log(a.__proto__ === Array.prototype) // true        console.log(b.__proto__ === Object.prototype) // true</code><br>我们发现a和b都有<code>__proto__</code>，分别指向了Array.prototype和Object.prototype。其实a,b都是内置的构造函数的实例对象，都基于类型分别继承了构造函数的prtotype。 </p><p>平常写的时候感觉很正常，其实像Array、Object这样的函数内置对象还有 Date、Function、RegExp、Json、Math。 </p><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>只要创建一个新函数，就会根据规则给这个函数创建一个prototype属性，这个属性指向函数的原型对象。<br>也可以这样理解，所有函数对象都指向Function.prototype，都是Function的实例。<br><code>function Fn(){}  console.log(Fn.__proto__ === Function.prototype) //true</code><br>也就是说，<code>__proto__</code>存在于实例与构造函数原型对象之间，而不是存在于实例与构造函数之间。也可以理解为原型链的形成主要还是看<code>__proto__</code>，而不是prototype。<br>趁项目做完，忙里偷闲弄下博客（以前的总结都在txt里，哈哈）。  </p>]]></content>
+    <content type="html"><![CDATA[<h2 id="原型链图-先上图"><a href="#原型链图-先上图" class="headerlink" title="原型链图(先上图)"></a>原型链图(先上图)</h2><p><img src="../../../../img/prototype_img.png" alt="js原型链">  </p><p>图片网上找的…</p><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="原型链的继承"><a href="#原型链的继承" class="headerlink" title="原型链的继承"></a>原型链的继承</h3><p>大家都知道面向对象有三大基本特性 ：封装、继承、多态。<br>继承是指让某个类型的对象获得另一个类型的对象的属性和方法。<br>而原型和原型链是Javascript实现继承的一种模型。<br>原型链的基本思想就是利用原型让一个引用类型继承另一个引用类型的属性和方法。原型链的构建是通过将一个类型的实例赋值给另一个构造函数的原型实现的。<br>Javascript在创建对象的时候，都有一个叫做<strong>proto</strong>的内置属性，用于指向创建它的构造函数的原型对象，也就是图片上的prototype（这个属性指向原型对象，只有函数才有）。<br>每个对象都有<code>__proto__</code>属性，指向所继承的上层对象，最顶级是null;<br>从图上看，可以看到null的上一个指针是指向Object.prototype,也就是说,可以把Object看做是一个构造函数(其实它就是一个内置的构造函数)，其他的方法就是基于这个类型继承而来的。<br><code>var a = [];//这个同等于 var a = new Array();        var b = {}; // 同等于 var b = new Object();        console.log(a.__proto__ === Array.prototype) // true        console.log(b.__proto__ === Object.prototype) // true</code><br>我们发现a和b都有<code>__proto__</code>，分别指向了Array.prototype和Object.prototype。其实a,b都是内置的构造函数的实例对象，都基于类型分别继承了构造函数的prtotype。 </p><p>平常写的时候感觉很正常，其实像Array、Object这样的函数内置对象还有 Date、Function、RegExp、Json、Math。 </p><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>只要创建一个新函数，就会根据规则给这个函数创建一个prototype属性，这个属性指向函数的原型对象。<br>也可以这样理解，所有函数对象都指向Function.prototype，都是Function的实例。<br><code>function Fn(){}  console.log(Fn.__proto__ === Function.prototype) //true</code><br>也就是说，<code>__proto__</code>存在于实例与构造函数原型对象之间，而不是存在于实例与构造函数之间。也可以理解为原型链的形成主要还是看<code>__proto__</code>，而不是prototype。<br>趁项目做完，忙里偷闲弄下博客。  </p>]]></content>
     
     <summary type="html">
     

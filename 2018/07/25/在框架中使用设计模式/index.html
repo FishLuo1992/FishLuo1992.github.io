@@ -81,20 +81,18 @@
 
 
 
-<meta name="description" content="浏览器的多线程这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。  GUI线程职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。   JS引擎线程职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致">
+<meta name="description" content="在框架中使用设计模式  框架的封装内部就有很多设计模式，比如Vue的订阅者观察模式等。API开放的都很好，使用者可以直接调用暴露的方法来解决日常的业务需求。如果项目比较大，内部的模块很多，需要达到复用优化的效果，这时就需要使用一些设计模式来解决问题了。 一、 构造函数模式的使用    这个相对于大多数的业务场景都有用到，像一般的弹窗、提示一类的组件都用到了构造函数模式。构造函数模式 是封装了一个类">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS的事件循环">
-<meta property="og:url" content="http://fishluo1992.github.io/2018/06/13/浏览的事件循环/index.html">
+<meta property="og:title" content="在框架中使用的一些设计模式">
+<meta property="og:url" content="http://fishluo1992.github.io/2018/07/25/在框架中使用设计模式/index.html">
 <meta property="og:site_name" content="fish_need_sea">
-<meta property="og:description" content="浏览器的多线程这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。  GUI线程职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。   JS引擎线程职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致">
+<meta property="og:description" content="在框架中使用设计模式  框架的封装内部就有很多设计模式，比如Vue的订阅者观察模式等。API开放的都很好，使用者可以直接调用暴露的方法来解决日常的业务需求。如果项目比较大，内部的模块很多，需要达到复用优化的效果，这时就需要使用一些设计模式来解决问题了。 一、 构造函数模式的使用    这个相对于大多数的业务场景都有用到，像一般的弹窗、提示一类的组件都用到了构造函数模式。构造函数模式 是封装了一个类">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://fishluo1992.github.io/img/bower.png">
-<meta property="og:updated_time" content="2018-06-14T06:44:42.497Z">
+<meta property="og:updated_time" content="2018-08-09T12:08:44.675Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS的事件循环">
-<meta name="twitter:description" content="浏览器的多线程这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。  GUI线程职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。   JS引擎线程职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致">
-<meta name="twitter:image" content="http://fishluo1992.github.io/img/bower.png">
+<meta name="twitter:title" content="在框架中使用的一些设计模式">
+<meta name="twitter:description" content="在框架中使用设计模式  框架的封装内部就有很多设计模式，比如Vue的订阅者观察模式等。API开放的都很好，使用者可以直接调用暴露的方法来解决日常的业务需求。如果项目比较大，内部的模块很多，需要达到复用优化的效果，这时就需要使用一些设计模式来解决问题了。 一、 构造函数模式的使用    这个相对于大多数的业务场景都有用到，像一般的弹窗、提示一类的组件都用到了构造函数模式。构造函数模式 是封装了一个类">
 
 
 
@@ -124,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://fishluo1992.github.io/2018/06/13/浏览的事件循环/"/>
+  <link rel="canonical" href="http://fishluo1992.github.io/2018/07/25/在框架中使用设计模式/"/>
 
 
 
 
 
-  <title>JS的事件循环 | fish_need_sea</title>
+  <title>在框架中使用的一些设计模式 | fish_need_sea</title>
   
 
 
@@ -267,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fishluo1992.github.io/2018/06/13/浏览的事件循环/">
+    <link itemprop="mainEntityOfPage" href="http://fishluo1992.github.io/2018/07/25/在框架中使用设计模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="没尾巴的鱼">
@@ -284,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JS的事件循环</h1>
+          <h1 class="post-title" itemprop="name headline">在框架中使用的一些设计模式</h1>
         
 
         <div class="post-meta">
@@ -296,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T00:00:00+08:00">
-                2018-06-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-25T20:08:00+08:00">
+                2018-07-25
               </time>
             
 
@@ -334,44 +332,135 @@
       
 
       
-        <h2 id="浏览器的多线程"><a href="#浏览器的多线程" class="headerlink" title="浏览器的多线程"></a>浏览器的多线程</h2><p>这里可能产生误区，浏览器不是单线程的吗？错了，JS是单线程的语言。浏览器需要渲染页面，执行JS等，是多线程的。<br><img src="../../../../img/bower.png" alt="vue_renderFn"> </p>
-<h4 id="GUI线程"><a href="#GUI线程" class="headerlink" title="GUI线程"></a>GUI线程</h4><p>职责：负责浏览器的页面html、css的构建，DOM树、renderObject对象，会计算出每个html的布局和解析css样式，最终呈现我们所看到的页面。  </p>
-<h4 id="JS引擎线程"><a href="#JS引擎线程" class="headerlink" title="JS引擎线程"></a>JS引擎线程</h4><p>职责：负责JS脚本的执行与GUI渲染线程是互斥的，这也是为啥html页面前引入JS会导致页面渲染速度变慢。所以一般把JS放在html页尾。当解析html时，如果页面有JS的引入，JS引擎会把JS全部执行一遍，执行完毕后，GUI线程才会继续执行。  </p>
-<h4 id="事件触发线程"><a href="#事件触发线程" class="headerlink" title="事件触发线程"></a>事件触发线程</h4><p>职责： 事件触发时，负责把事件放入队列，等待特定的触发条件时再执行。  </p>
-<h4 id="定时器线程"><a href="#定时器线程" class="headerlink" title="定时器线程"></a>定时器线程</h4><p>职责： 将setTimeout 和 setInteval执行函数在触发时放入队列等待执行。  </p>
-<h4 id="http请求线程"><a href="#http请求线程" class="headerlink" title="http请求线程"></a>http请求线程</h4><p>职责: 监听请求状态变更，将相应函数放入队列，等待执行。</p>
-<h2 id="JS事件循环"><a href="#JS事件循环" class="headerlink" title="JS事件循环"></a>JS事件循环</h2><h4 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h4><p>JS引擎的运行机制分为：<strong>执行栈</strong>和<strong>队列</strong>， JS的代码都在栈中执行，分为<strong>同步执行</strong>和<strong>异步执行</strong>，只有同步代码执行完毕后，才会执行异步代码。 </p>
-<p><strong>JS引擎解析代码规则：</strong><br>1.先把执行栈内的代码都执行一遍。<br>2.在执行的过程中，如果碰到触发事件(点击或者别的事件)、http请求(ajax请求)、延时执行(setTimeout，setInterval)就会依各自的线程进行监听，放入队列。<br>3.当执行栈空后，就会依次查找队列，把适时的代码放入执行栈，执行相应的代码。  </p>
-<p>一道常见的Event Loop 面试题    </p>
-<pre><code>console.log(&apos;script start&apos;);
-const date = new Date();
-setTimeout(() =&gt; {
-    console.log(&apos;setTimeout1&apos; + &apos;------&apos; + (new Date() - date));
-}, 0);
-setTimeout(() =&gt; {
-    console.log(&apos;setTimeout2&apos; + &apos;------&apos; + (new Date() - date));
-},0)
-new Promise((resolve) =&gt; {
-    console.log(&apos;script1&apos;);
-    resolve();
-}).then(function() {
-    console.log(&apos;script 2&apos;);
-}).then(function() {
-    console.log(&apos;script 3&apos;);
-})
+        <p><strong>在框架中使用设计模式</strong></p>
+<p> <strong><em>框架的封装内部就有很多设计模式，比如Vue的订阅者观察模式等。API开放的都很好，使用者可以直接调用暴露的方法来解决日常的业务需求。<br>如果项目比较大，内部的模块很多，需要达到复用优化的效果，这时就需要使用一些设计模式来解决问题了。</em></strong></p>
+<p><strong>一、 构造函数模式的使用</strong><br>    <strong><em>这个相对于大多数的业务场景都有用到，像一般的弹窗、提示一类的组件都用到了构造函数模式</em></strong>。<br>构造函数模式 是封装了一个类（也可以理解一个方法），内部通过this来管理自己的数据和方法，并return 需要暴露的参数或者方法。直接通过new fn（）来调用实例化对象。生产一个需要的方法。类似 vue封装的一些message，notify函数，内部封装完好，直接return new fn ，我们页不需要再写一遍new。直接调用就可以。<br>这种设计模式比较常规，用起来也是简单粗暴。</p>
+<p><strong>二、 单列模式</strong><br>这个模式也很好理解，就是只返回一个需要的实例，没有 就创建一个实例返回。</p>
+<pre><code>let Single = (function(){ var instance; function init() { 
+//define private methods and properties //do something
+ return { //define public methods and properties }; }
+ return { // 获取实例 getInstance:function(){ if(!instance){ instance = init(); }
+ return instance; } } })();
+ const obj1 = Single.getInstance();
+ const obj2 = Single.getInstance(); 
+console.log(obj1 === obj2); 
+</code></pre><p>在平常使用框架时，如果需要在页面只显示或者只需要一个的时候，就可以通过这个设计模式来解决问题。<br>比如移动端的剧中弹窗，就可以通过这种方法来解决。</p>
+<p><strong>三、 混合模式</strong><br>也就是 原型模式（prototype）和 构造函数模式的结合，这个也比较好理解</p>
+<pre><code>import Vue from &apos;vue&apos;;
+import testTost from &quot;./toast.vue&quot;;
 
-console.log(&apos;script end&apos;);    
-</code></pre><p>直接看答案吧     </p>
-<pre><code>script start 
- script1  
-script end  
-script 2  
-script 3  
-setTimeout1------6 
-setTimeout2------8  // 这里可能每次的值都不一样  
-</code></pre><p>在解释结果前还需要了解一下。JS引擎在解析JS代码时，会把任务源分为：<strong>微任务</strong>和<strong>宏任务</strong>；微任务包括：promise的回调、Object.observe，宏任务有：JS、setTimeout、setIntterval;<br>JS的设计是单线程的，在执行任务时，会把JS从头到尾依次解析，当碰到微任务和宏任务时，会把他们放入队列，等待执行。JS还在执行，在执行完后，就会去队列先把微任务依次放入栈内执行。这就是第一次循环，当把第一次执行产生的微任务执行完毕后就会把队列的宏任务拿出放入执行栈，依次执行，执行完后再循环。这样的执行顺序就叫事件循环，也就是Event Loop;结合线程的理解会更容易也会更深刻，所以即使setTimeout的延时设置为0，但他属于宏任务，等JS和微任务都执行完毕后的下一个事件循环才会执行。</p>
-<p>然后再看上面的那道题，会不会瞬间感觉清洗脱俗。现在再来解析下答案。<br>1.JS是单线程的（为了解决一些操作DOM会产生无法描述的顺序问题等），代码依次执行，所以第一个输出 script start;<br>2.解析碰到setTimeout，这个属于宏任务，放入队列，等待下一次循环再执行。<br>3.promise会先输出同步的 script1 ，then的回调是微任务，放入执行队列。<br>4.输出 script end ;<br>到了这里就已经清空了一次任务栈，然后开始查找微任务。<br>5.把微任务的任务放入执行栈执行，输出script2,再输出回调的script3。<br>6.队列的微任务已清空完毕，开始下一次事件循环，把队列的宏任务放入执行栈内执行，输出第一个setTimeout1,setTimeout源码规定了最小值为4ms，所以不论执行速度，执行的结果最短都大于4ms。再输出setTimeout2.<br>整个事件执行完毕。  </p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>1.结合浏览器的线程来理解会更明白一点。<br>2.JS的执行会被线程监听。如我们平常所用的观察者模式一样，每个被放入队列的事件都会被打上标记，比如ajax请求会被http线程监听，也就是当发起一个请求后，http属于pedding状态，当数据返回或者请求错误时，http线程会把结果返回，Event Loop当次循环到这个事件，放入栈内执行ajax回调，把结果返回。<br>3.如果需要更深层次的I/O事件，需要了解浏览器的JS引擎，先埋个点。  </p>
+const ToastConstructor = Vue.extend(testTost); 
+let toastPool = [];
+
+let getAnInstance = () =&gt; {
+  if (toastPool.length &gt; 0) {
+    let instance = toastPool[0];
+    toastPool.splice(0, 1);
+    return instance;
+  }
+  return new ToastConstructor({
+    el: document.createElement(&apos;div&apos;)
+  });
+};
+
+let returnAnInstance = instance =&gt; {
+  if (instance) {
+    toastPool.push(instance);
+  }
+};
+
+let removeDom = event =&gt; {
+  if (event.target.parentNode) {
+    event.target.parentNode.removeChild(event.target);
+  }
+};
+
+// toast 的close方法
+ToastConstructor.prototype.close = function () {
+  this.visible = false;
+  this.$el.addEventListener(&apos;transitionend&apos;, removeDom);
+  this.closed = true;
+  returnAnInstance(this);
+};
+
+// Toast函数
+let Toast = (options = {}) =&gt; {
+  let duration = options.duration || 0;
+  // 实例对象
+  let instance = getAnInstance();
+  instance.closed = false;
+  clearTimeout(instance.timer); // 清除显示
+  // 实例的方法
+  instance.message = typeof options === &apos;string&apos; ? options : options.message;
+  instance.position = options.position || &apos;&apos;;
+  instance.className = options.className || &apos;&apos;;
+  instance.iconSrc = options.iconSrc || {};
+  // 挂载到body上
+  document.body.appendChild(instance.$el);
+  // 保证元素在DOM上
+  Vue.nextTick(function () {
+    instance.visible = true;
+    instance.$el.removeEventListener(&apos;transitionend&apos;, removeDom);
+    if (duration) {
+      instance.timer = setTimeout(function () {
+        if (instance.closed) return;
+        instance.close();
+      }, duration);
+    }
+  });
+  return instance;
+};
+
+// 使插件可以全局调用
+function MineToast() {
+  Vue.$toast = Vue.prototype.$toast = Toast;
+}
+
+export default MineToast;    
+</code></pre><p>混合模式中构造函数模式用于定义实例属性,而原型模式用于定义方法和共享属性. 每个实例都会有自己的一份实例属性,但同时又共享这方法,最大限度的节省了内存.另外这种模式还支持传递初始数据.优点胜多,这种模式使用广泛,认同度最高的一种创建自定义对象的方法.</p>
+<p>在这个封装的插件组件内部，运用了混合模式、单例模式。保证了实例的单一，达到需要的效果。 </p>
+<p><strong>四、 动态原型模式</strong><br>动态原型模式将所有信息封装在了构造函数中,而通过构造函数中初始化原型,这个可以通过判断该方法是否有效而选择是否需要初始化原型.<br>可以举一个我组件react项目中的例子。<br>    // fromFactory.js<br>    import {Fld_Type} from ‘../dataTable/fldType’<br>    import CommonField from ‘./commonField’<br>    import ReadField from ‘./readField’<br>    import EnumField from ‘./enumField’<br>    import SingleImage from ‘./singleImage’<br>    import MutilImage from ‘./mutilImage’<br>    import React from ‘react’<br>    import cloneDeep from ‘lodash.clonedeep’</p>
+<pre><code>export function buildEditField(form,name,value,props,viewName,reverse){
+switch(props.vtype) {
+    case Fld_Type.type_common:
+        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+    case Fld_Type.type_read:
+        return React.createElement(ReadField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+    case Fld_Type.type_queryone:
+    case Fld_Type.type_querylist:
+    case Fld_Type.type_enum:
+        return React.createElement(EnumField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+    case Fld_Type.type_remark:
+        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+    case Fld_Type.type_date:
+        if(props.immutability||props.auto){
+            return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+        }
+    return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+    case Fld_Type.type_time:
+        if(props.immutability||props.auto){
+            return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+        }
+        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+    case Fld_Type.type_datetime:
+        if(props.immutability||props.auto){
+            return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+        }
+        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+    case Fld_Type.type_singleImage:
+        return React.createElement(SingleImage,{form:form,name:name,fieldProps:props})
+    case Fld_Type.type_mutilImage:
+        return React.createElement(MutilImage,{form:form,name:name,fieldProps:props})
+    default:
+        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
+    }
+
+}
+</code></pre><p>这些是封装的一些通用的表单子组件，在使用可以直接通过调用函数来构建需求的组件，最终组成一个From表单。    </p>
+<pre><code>const reactElement = buildAddField(form,item[0],item[1],this.props.viewName,{moniterItem:moniterItem});        
+</code></pre><p>结构很清晰，使用起来也很简单。    </p>
+<p><strong>总结</strong>            </p>
+<p>对于平常的一些模块的封装，需要深刻了解最终需要达到的效果，再来选择最适合的设计模式来解决问题。思想的组织很重要。</p>
 
       
     </div>
@@ -402,8 +491,8 @@ setTimeout2------8  // 这里可能每次的值都不一样
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/06/vue的render函数/" rel="next" title="Vue的render函数">
-                <i class="fa fa-chevron-left"></i> Vue的render函数
+              <a href="/2018/07/06/vue的Toast封装/" rel="next" title="Vue的Toast">
+                <i class="fa fa-chevron-left"></i> Vue的Toast
               </a>
             
           </div>
@@ -412,8 +501,8 @@ setTimeout2------8  // 这里可能每次的值都不一样
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/06/vue的Toast封装/" rel="prev" title="Vue的Toast">
-                Vue的Toast <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/28/React+Dva之路/" rel="prev" title="React+Dva的路">
+                React+Dva的路 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -469,17 +558,8 @@ setTimeout2------8  // 这里可能每次的值都不一样
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -541,22 +621,6 @@ setTimeout2------8  // 这里可能每次的值都不一样
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器的多线程"><span class="nav-number">1.</span> <span class="nav-text">浏览器的多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GUI线程"><span class="nav-number">1.0.1.</span> <span class="nav-text">GUI线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS引擎线程"><span class="nav-number">1.0.2.</span> <span class="nav-text">JS引擎线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件触发线程"><span class="nav-number">1.0.3.</span> <span class="nav-text">事件触发线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定时器线程"><span class="nav-number">1.0.4.</span> <span class="nav-text">定时器线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求线程"><span class="nav-number">1.0.5.</span> <span class="nav-text">http请求线程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS事件循环"><span class="nav-number">2.</span> <span class="nav-text">JS事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件循环"><span class="nav-number">2.0.1.</span> <span class="nav-text">事件循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
