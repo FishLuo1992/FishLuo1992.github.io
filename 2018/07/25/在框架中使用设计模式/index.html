@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="在框架中使用设计模式  现在的一些框架封装的都很好，我们可以通过框架暴露的一些API就可以解决一般的业务需求。但项目比较大，内部的模块复用较多，需要达到复用的效果，使用设计模式就可以更好地解决问题。 一、 构造函数模式的使用    大多数的业务场景都有用到，像一般的弹窗、提示一类的组件都用到了构造函数模式。构造函数模式 是封装了一个类（也可以理解一个方法），内部通过this来管理自己的数据和方法，">
+<meta name="description" content="在框架中使用设计模式  现在的一些框架封装的都很好，我们可以通过框架暴露的一些API就可以解决一般的业务需求。但项目比较大，内部的模块复用较多，需要自己架构，模块达到复用的效果，使用设计模式就可以更好地解决问题。     △有一点需要注意，绝对不要有为了用设计模式而用设计模式，代价很大。一切都是为了项目和需求，能简单粗暴就简单粗暴，不能为了想造轮子而去造轮子，是必要时才去使用。  一、 构造函数模">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在框架中使用的一些设计模式">
 <meta property="og:url" content="http://fishluo1992.github.io/2018/07/25/在框架中使用设计模式/index.html">
 <meta property="og:site_name" content="fish_need_sea">
-<meta property="og:description" content="在框架中使用设计模式  现在的一些框架封装的都很好，我们可以通过框架暴露的一些API就可以解决一般的业务需求。但项目比较大，内部的模块复用较多，需要达到复用的效果，使用设计模式就可以更好地解决问题。 一、 构造函数模式的使用    大多数的业务场景都有用到，像一般的弹窗、提示一类的组件都用到了构造函数模式。构造函数模式 是封装了一个类（也可以理解一个方法），内部通过this来管理自己的数据和方法，">
+<meta property="og:description" content="在框架中使用设计模式  现在的一些框架封装的都很好，我们可以通过框架暴露的一些API就可以解决一般的业务需求。但项目比较大，内部的模块复用较多，需要自己架构，模块达到复用的效果，使用设计模式就可以更好地解决问题。     △有一点需要注意，绝对不要有为了用设计模式而用设计模式，代价很大。一切都是为了项目和需求，能简单粗暴就简单粗暴，不能为了想造轮子而去造轮子，是必要时才去使用。  一、 构造函数模">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-10T03:42:49.903Z">
+<meta property="og:updated_time" content="2018-09-19T10:23:51.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在框架中使用的一些设计模式">
-<meta name="twitter:description" content="在框架中使用设计模式  现在的一些框架封装的都很好，我们可以通过框架暴露的一些API就可以解决一般的业务需求。但项目比较大，内部的模块复用较多，需要达到复用的效果，使用设计模式就可以更好地解决问题。 一、 构造函数模式的使用    大多数的业务场景都有用到，像一般的弹窗、提示一类的组件都用到了构造函数模式。构造函数模式 是封装了一个类（也可以理解一个方法），内部通过this来管理自己的数据和方法，">
+<meta name="twitter:description" content="在框架中使用设计模式  现在的一些框架封装的都很好，我们可以通过框架暴露的一些API就可以解决一般的业务需求。但项目比较大，内部的模块复用较多，需要自己架构，模块达到复用的效果，使用设计模式就可以更好地解决问题。     △有一点需要注意，绝对不要有为了用设计模式而用设计模式，代价很大。一切都是为了项目和需求，能简单粗暴就简单粗暴，不能为了想造轮子而去造轮子，是必要时才去使用。  一、 构造函数模">
 
 
 
@@ -333,16 +333,28 @@
 
       
         <p><strong>在框架中使用设计模式</strong></p>
-<p> <strong>现在的一些框架封装的都很好，我们可以通过框架暴露的一些API就可以解决一般的业务需求。但项目比较大，内部的模块复用较多，需要达到复用的效果，使用设计模式就可以更好地解决问题。</strong></p>
+<p> <strong>现在的一些框架封装的都很好，我们可以通过框架暴露的一些API就可以解决一般的业务需求。但项目比较大，内部的模块复用较多，需要自己架构，模块达到复用的效果，使用设计模式就可以更好地解决问题。</strong>    </p>
+<p><strong>△有一点需要注意，绝对不要有为了用设计模式而用设计模式，代价很大。一切都是为了项目和需求，能简单粗暴就简单粗暴，不能为了想造轮子而去造轮子，是必要时才去使用。</strong></p>
+<hr>
 <p><strong>一、 构造函数模式的使用</strong><br>    <strong>大多数的业务场景都有用到，像一般的弹窗、提示一类的组件都用到了构造函数模式</strong>。<br>构造函数模式 是封装了一个类（也可以理解一个方法），内部通过this来管理自己的数据和方法，并return 需要暴露的参数或者方法。直接通过new fn（）来调用实例化对象。生产一个需要的方法。类似 vue封装的一些message，notify函数，内部封装完好，直接return new fn ，我们页不需要再写一遍new。直接调用就可以。<br>这种设计模式比较常规，用起来也是简单粗暴。</p>
 <p><strong>二、 单列模式</strong><br>这个模式也很好理解，就是只返回一个需要的实例，没有 就创建一个实例返回。</p>
 <pre><code>let Single = (function(){ var instance; function init() { 
-//define private methods and properties //do something
- return { //define public methods and properties }; }
- return { // 获取实例 getInstance:function(){ if(!instance){ instance = init(); }
- return instance; } } })();
- const obj1 = Single.getInstance();
- const obj2 = Single.getInstance(); 
+//define private methods and properties 
+//do something
+ return {
+     //define public methods and properties }; 
+}
+ return { // 获取实例 
+getInstance:function(){
+     if(!instance){
+         instance = init(); 
+}
+ return instance;
+         } 
+     } 
+})();
+const obj1 = Single.getInstance();
+const obj2 = Single.getInstance(); 
 console.log(obj1 === obj2); 
 </code></pre><p>在平常使用框架时，如果需要在页面只显示或者只需要一个的时候，就可以通过这个设计模式来解决问题。<br>比如移动端的剧中弹窗，就可以通过这种方法来解决。</p>
 <p><strong>三、 混合模式</strong><br>也就是 原型模式（prototype）和 构造函数模式的结合，这个也比较好理解</p>
@@ -430,37 +442,54 @@ switch(props.vtype) {
     case Fld_Type.type_querylist:
     case Fld_Type.type_enum:
         return React.createElement(EnumField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
-    case Fld_Type.type_remark:
-        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
-    case Fld_Type.type_date:
-        if(props.immutability||props.auto){
-            return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
-        }
-    return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
-    case Fld_Type.type_time:
-        if(props.immutability||props.auto){
-            return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
-        }
-        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
-    case Fld_Type.type_datetime:
-        if(props.immutability||props.auto){
-            return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
-        }
-        return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
-    case Fld_Type.type_singleImage:
-        return React.createElement(SingleImage,{form:form,name:name,fieldProps:props})
-    case Fld_Type.type_mutilImage:
-        return React.createElement(MutilImage,{form:form,name:name,fieldProps:props})
+
     default:
         return React.createElement(CommonField,{form:form,name:name,value:value,fieldProps:props,target:viewName,reverse:reverse})
     }
 
 }
 </code></pre><p>这些是封装的一些通用的表单子组件，在使用可以直接通过调用函数来构建需求的组件，最终组成一个From表单。    </p>
-<pre><code>const reactElement = buildAddField(form,item[0],item[1],this.props.viewName,{moniterItem:moniterItem});        
-</code></pre><p>结构很清晰，使用起来也很简单。    </p>
+<pre><code>const reactElement = buildAddField(form,item[0],item[1],this.props.viewName,{moniterItem:moniterItem});    
+</code></pre><p>在项目中也可以封装通用的Icon配置。<br>    import styles from ‘./index.less’;<br>    import React from ‘react’<br>    import { Icon } from ‘antd’</p>
+<pre><code>export default class OpDefaultIcon{
+     constructor(){
+    this.opIcon = new Array;
+    this.opIcon[&quot;add&quot;]=&lt;div id=&quot;add&quot; &gt;&lt;Icon key=&quot;add&quot; type=&quot;file-add&quot; className={styles.iconStyle}/&gt;添加&lt;/div&gt;;
+
+    this.opIcon[&quot;del&quot;]=&lt;div id=&quot;del&quot; &gt;&lt;Icon key=&quot;del&quot; type=&quot;delete&quot; className={styles.iconStyle}/&gt;删除&lt;/div&gt;;
+
+    this.opIcon[&quot;detail&quot;]=&lt;div id=&quot;detail&quot; &gt;&lt;Icon key=&quot;detail&quot; type=&quot;file-text&quot; className={styles.iconStyle}/&gt;详情&lt;/div&gt;;
+
+    this.opIcon[&quot;export&quot;]=&lt;div id=&quot;export&quot;  &gt;&lt;Icon key=&quot;export&quot; type=&quot;cloud-upload&quot; className={styles.iconStyle}/&gt;导出&lt;/div&gt;;
+
+    this.opIcon[&quot;import&quot;]=&lt;div id=&quot;import&quot; &gt;&lt;Icon key=&quot;import&quot; type=&quot;cloud-download-o&quot; className={styles.iconStyle}/&gt;导入&lt;/div&gt;;
+
+    this.opIcon[&quot;edit&quot;]=&lt;div id=&quot;edit&quot; &gt;&lt;Icon key=&quot;edit&quot; type=&quot;edit&quot; className={styles.iconStyle}/&gt;编辑&lt;/div&gt;;
+
+    this.opIcon[&quot;default&quot;]=&lt;div id=&quot;default&quot; &gt;&lt;Icon key=&quot;default&quot; type=&quot;cloud&quot; className={styles.iconStyle}/&gt;默认&lt;/div&gt;;
+}
+getDefaultIcon(name,alias,type,opClick){
+    let icon = this.opIcon[name]
+    if(!icon)icon=this.opIcon[&quot;default&quot;]
+    let element = icon;
+    if(alias){
+        if(type === 1){
+            return React.cloneElement(element,{onClick:opClick,key:name},element.props.children[0],alias);    
+        }else{
+            return React.cloneElement(element,{onClick:opClick,key:name},element.props.children[0]);  
+        }
+
+    }
+    return React.cloneElement(element,{onClick:opClick,key:name},element.props.children);
+  }
+  }
+</code></pre><p>调用起来也非常方便，模块也符合单一原则，低耦合原则。    </p>
+<pre><code>const e = this.defaultIcon.getDefaultIcon(name,alias,type,opClick)
+</code></pre><p>结构很清晰，使用起来也很简单粗暴。    </p>
 <p><strong>总结</strong>            </p>
-<p>对于平常的一些模块的封装，需要深刻了解最终需要达到的效果，再来选择最适合的设计模式来解决问题。思想的组织很重要。</p>
+<p>对于平常的一些模块的封装，需要深刻了解最终需要达到的效果，再来选择最适合的设计模式来解决问题。    </p>
+<p>如果碰到一些事件，可以直接通过回调来处理，要保证模块的单一性，和低耦合。        </p>
+<p>常用项目中的一些模块(地图，表格，模态框一类)可以通过常用的混合设计模式就可以达到理想的效果，结构清晰，可以复用。<br><strong>△ 不要为了用设计模式而用设计模式，工作项目需要、能更好解决问题而用</strong></p>
 
       
     </div>
@@ -500,10 +529,6 @@ switch(props.vtype) {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/28/React+Dva之路/" rel="prev" title="React+Dva的路">
-                React+Dva的路 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -578,7 +603,7 @@ switch(props.vtype) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
