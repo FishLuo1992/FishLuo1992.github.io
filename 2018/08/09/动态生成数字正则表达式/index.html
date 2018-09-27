@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Vue," />
+  <meta name="keywords" content="JS," />
 
 
 
@@ -81,21 +81,20 @@
 
 
 
-<meta name="description" content="起源  这是上一个项目了，公司内部的OA系统，页面近30个了，由我这个前端和一个java大神完成。总体时间也近两个月，接口的调试时间也占了很多，因为数据逻辑的耦合度太高了。  下面谈谈一其中的个小需求吧！看图！       就是这种审批流程图，看起来比一般的线流程图多了一点样式。因为项目的模块不少，每个模块都有不同的审批流程，像这样         解剖一下   每个模块多个流程都需要看到这个流程">
-<meta name="keywords" content="Vue">
+<meta name="description" content="起因        嗯~o(￣▽￣)o，项目是个基础框架，为了达到字段的动态配置。然后就有了这个 动态生成数字正则表达式的需求，老大还不忘对我说了句：“小伙子，看好你哦。”。嗯，好像就是这样！如果静态的生成的数字范围的话，还是很简单的。但动态的第一次见，嗯，沉浸在挑战的亢奋中~！    分析   如果是范围的话，那就有最小和最大的,先从最大的入手。1，动态生成正则的方法只有一种，使用new Reg">
+<meta name="keywords" content="JS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="奇怪的流程">
-<meta property="og:url" content="http://fishluo1992.github.io/2018/05/31/vue的小坑one/index.html">
+<meta property="og:title" content="动态生成匹配数字范围的正则表达式">
+<meta property="og:url" content="http://fishluo1992.github.io/2018/08/09/动态生成数字正则表达式/index.html">
 <meta property="og:site_name" content="fish_need_sea">
-<meta property="og:description" content="起源  这是上一个项目了，公司内部的OA系统，页面近30个了，由我这个前端和一个java大神完成。总体时间也近两个月，接口的调试时间也占了很多，因为数据逻辑的耦合度太高了。  下面谈谈一其中的个小需求吧！看图！       就是这种审批流程图，看起来比一般的线流程图多了一点样式。因为项目的模块不少，每个模块都有不同的审批流程，像这样         解剖一下   每个模块多个流程都需要看到这个流程">
+<meta property="og:description" content="起因        嗯~o(￣▽￣)o，项目是个基础框架，为了达到字段的动态配置。然后就有了这个 动态生成数字正则表达式的需求，老大还不忘对我说了句：“小伙子，看好你哦。”。嗯，好像就是这样！如果静态的生成的数字范围的话，还是很简单的。但动态的第一次见，嗯，沉浸在挑战的亢奋中~！    分析   如果是范围的话，那就有最小和最大的,先从最大的入手。1，动态生成正则的方法只有一种，使用new Reg">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://fishluo1992.github.io/img/project_1.png">
-<meta property="og:image" content="http://fishluo1992.github.io/img/project_2.png">
-<meta property="og:updated_time" content="2018-06-01T09:33:34.000Z">
+<meta property="og:image" content="http://fishluo1992.github.io/img/regexp.png">
+<meta property="og:updated_time" content="2018-09-27T10:53:17.701Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="奇怪的流程">
-<meta name="twitter:description" content="起源  这是上一个项目了，公司内部的OA系统，页面近30个了，由我这个前端和一个java大神完成。总体时间也近两个月，接口的调试时间也占了很多，因为数据逻辑的耦合度太高了。  下面谈谈一其中的个小需求吧！看图！       就是这种审批流程图，看起来比一般的线流程图多了一点样式。因为项目的模块不少，每个模块都有不同的审批流程，像这样         解剖一下   每个模块多个流程都需要看到这个流程">
-<meta name="twitter:image" content="http://fishluo1992.github.io/img/project_1.png">
+<meta name="twitter:title" content="动态生成匹配数字范围的正则表达式">
+<meta name="twitter:description" content="起因        嗯~o(￣▽￣)o，项目是个基础框架，为了达到字段的动态配置。然后就有了这个 动态生成数字正则表达式的需求，老大还不忘对我说了句：“小伙子，看好你哦。”。嗯，好像就是这样！如果静态的生成的数字范围的话，还是很简单的。但动态的第一次见，嗯，沉浸在挑战的亢奋中~！    分析   如果是范围的话，那就有最小和最大的,先从最大的入手。1，动态生成正则的方法只有一种，使用new Reg">
+<meta name="twitter:image" content="http://fishluo1992.github.io/img/regexp.png">
 
 
 
@@ -125,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://fishluo1992.github.io/2018/05/31/vue的小坑one/"/>
+  <link rel="canonical" href="http://fishluo1992.github.io/2018/08/09/动态生成数字正则表达式/"/>
 
 
 
 
 
-  <title>奇怪的流程 | fish_need_sea</title>
+  <title>动态生成匹配数字范围的正则表达式 | fish_need_sea</title>
   
 
 
@@ -268,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fishluo1992.github.io/2018/05/31/vue的小坑one/">
+    <link itemprop="mainEntityOfPage" href="http://fishluo1992.github.io/2018/08/09/动态生成数字正则表达式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="没尾巴的鱼">
@@ -285,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">奇怪的流程</h1>
+          <h1 class="post-title" itemprop="name headline">动态生成匹配数字范围的正则表达式</h1>
         
 
         <div class="post-meta">
@@ -297,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T19:47:45+08:00">
-                2018-05-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-09T00:07:00+08:00">
+                2018-08-09
               </time>
             
 
@@ -335,73 +334,146 @@
       
 
       
-        <h4 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h4><p>  这是上一个项目了，公司内部的OA系统，页面近30个了，由我这个前端和一个java大神完成。总体时间也近两个月，接口的调试时间也占了很多，因为数据逻辑的耦合度太高了。<br>  下面谈谈一其中的个小需求吧！看图！  </p>
-<p>  <img src="../../../../img/project_1.png" alt="js原型链"><br>  就是这种审批流程图，看起来比一般的线流程图多了一点样式。因为项目的模块不少，每个模块都有不同的审批流程，像这样  </p>
-<p>   <img src="../../../../img/project_2.png" alt="js原型链">  </p>
-<h2 id="解剖一下"><a href="#解剖一下" class="headerlink" title="解剖一下"></a>解剖一下</h2><p>   每个模块多个流程都需要看到这个流程走向，图像的上面是一个显示详细审批的信息列表。因为每个模块的流程图都不同，所有只能每个模块封装一个独有的组件来分别显示。 数据直接父组件传给子组件。 </p>
-<p> <em>思考</em><br>  看到这样的设计图，直接简单粗暴的分析下。<br>  流程的显示有三种，分别是未开始、已处理和下一步处理，另外还有个驳回箭头。<br>  1.一般来讲，我们首先想到的会是用canvas来控制几种样式的逻辑<br>  2.另外还可以用JS+CSS来控制。  </p>
-<p>   <em>动手</em><br> 嗯，canvas貌似也不错，在花了一个多小时画完这个图后，瞅瞅代码，这什么鬼。代码上百行，还没加逻辑判断，连自己看不下去了。再试试下个方案吧。<br> vue,可以类似JSP页面，HTML可以嵌套JS。那么逻辑控制显示就没问题了。那就得先把图画好了，圆和条子很简单，箭头也直接border画个三角形就OK了，不正规的菱形？两个三角形对立就OK了。  </p>
-<pre><code>border-top: 5px solid transparent;
-border-bottom: 5px solid transparent;
-border-left: 5px solid #878787;  
-</code></pre><p>对的，就是这样。  </p>
-<p><em>逻辑和数据处理</em><br>UI界面的图就这样完美出来了，是不难吧。嗯，只是开始。后台给我的接口只有一个数据seq来控制整个流程。对的，只有一个seq！！！ 我这边需要控制每个步骤图的三种不同的显示和驳回箭头的显示。   </p>
-<p>嗯，不难，真的。只是多了点判断，像这样。  </p>
-<pre><code> if(res.data.data.length &gt; 1 &amp;&amp; index == res.data.data.length-1){
-    if(arr[index].seq &lt; arr[index-1].seq){
-        if(arr[index-1].seq == 2){
-            that.ctrl = {&quot;step&quot;:Number(item.seq)-1,&quot;stop&quot;:1}
-        }else if(arr[index-1].seq == 5){
-            that.ctrl = {&quot;step&quot;:Number(item.seq)-1,&quot;stop&quot;:2}
-        }else if(arr[index-1].seq == 6){
-            that.ctrl = {&quot;step&quot;:Number(item.seq)-1,&quot;stop&quot;:3}
-        }else{
-            that.ctrl = {&quot;step&quot;:8,&quot;stop&quot;:0}
-        }            
-    }else{
-        that.ctrl = {&quot;step&quot;:Number(item.seq),&quot;stop&quot;:0}
-    }    
-}else{
-    that.ctrl = {&quot;step&quot;:1,&quot;stop&quot;:0}
-}
-</code></pre><p>最终直接把ctrl传给子组件，参数是step和驳回的stop。那么接下来就是子组件控制流程的样式了，对的，这个也不难。<br>先取到数据  </p>
-<pre><code>watch:{
-     ctrl:function(newval,oldval){
-             if(newval != oldval){
-                 this.getData()
-             }
-         }
- },
- props:{
-     ctrl:{
-         type:Object,
-         default:function(){
-             return {};
-         }
-     }
- }
-</code></pre><p>因为一个模块内的每个流程都需要这个显示，所有需要watch一下保证数据完美的显示。  </p>
-<h2 id="问题来了"><a href="#问题来了" class="headerlink" title="问题来了"></a>问题来了</h2><p>数据有了，基本页面也完美展示了，那通过数据该咋渲染呢？<br>嗯，这个也不难。用来控制Class来控制就好，像这样  </p>
-<pre><code>:class=&quot;step_t?&apos;ctrl-step-rebut&apos;:&apos;&apos;&quot;   
-</code></pre><p>是的这样可以控制两种，那这里有三种咋控制呢？这样？  </p>
-<pre><code>:class=&quot;stepTwo?&apos;ctrl-first-right-writhe&apos;:(stepOne?&apos;ctrl-first-right-son&apos;:&apos;&apos;)&quot;  
-</code></pre><p>对的，就是这样，理论上三元表达式可以无限叠，但一般不会这样，万一其他人来维护这个项目呢，那不直接带刀找你了，所有两层就可以了，多层用if elseif来判断。<br>这样就可以完美的控制三种显示了。step 和 stop 也需要处理  </p>
-<pre><code>switch (this.ctrl.step)
-           {
-               case 1: 
-                ...
-                break; 
-               case 2:
-                ...
-                break;  
-               case 3:
-                ...
-                break;
-            }  
+        <p><strong>起因</strong>      </p>
+<hr>
+<p>嗯~o(<em>￣▽￣</em>)o，项目是个基础框架，为了达到字段的动态配置。然后就有了这个 <strong>动态生成数字正则表达式的需求</strong>，老大还不忘对我说了句：“小伙子，看好你哦。”。嗯，好像就是这样！<br>如果静态的生成的数字范围的话，还是很简单的。但动态的第一次见，嗯，沉浸在挑战的亢奋中~！  </p>
+<hr>
+<p><strong>分析</strong>  </p>
+<p>如果是范围的话，那就有最小和最大的,先从最大的入手。<br>1，动态生成正则的方法只有一种，使用new RegExp(string)的方法把string类型转换成regexp。<br>2，正则是匹配到每一个数字的，所以需要确定范围，比如100的范围有<br>\d \d\d 100 三种,123 有 \d \d\d 1[0-1][0-9] 1[0-2][0-3] 依次类推。需要生成的范围就容易确认。<br>3，通过遍历输入的数字长度和每个值来生成相应的字符串，最终拼接成完整的字符串，通过new RegExp来生成最终的正则。<br><strong>生成的最大值动态正则</strong>  </p>
+<pre><code>function ruleMax(max, errorMessage) {
+  if (!Number(max)) return;
+  if (Number(max) &lt; 0) return;
+  let a = max + &apos;&apos;
+  let aStr = &apos;\^&apos; + a;
+  let b = []
+  let d = []
+  let middlePat = []
+  let finallyArr = []
+  let finallyReg = &apos;&apos;
+  let patMaxO = &apos;&apos;
+  let midS;
+  let reMax = {}
+  for (let i = 0, len = a.length; i &lt; len; i++) {
+    if (i &gt; 0) {
+      patMaxO += &apos;|\^&apos;
+      for (let j = 0; j &lt; i; j++) {
+        patMaxO += &apos;\\d&apos;
+      }
+      patMaxO += &apos;\$&apos;
+    }
 
-  switch (this.ctrl.stop){...}  
-</code></pre><p> 就这样，直接判断出流程走到哪一步，直接再通过显示哪里class来显示对应的样式就可以了。  </p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1.相比canvas来讲，用JS+css来解决这样流图更好，代码没那么复杂，能一看就懂，样式和一些逻辑也可以复用，清晰易懂。<br>2.业务都不难，难的是对底层代码的理解和自己实现业务逻辑的方法。每次碰到带点逻辑的业务还是需要仔细分析，保证自己能做到自己能做到的极限。<br>3.vue用起来还是很爽的，下一篇博客也来讲讲自己对vue的理解吧。</p>
+    b.push(&apos;[0-&apos; + a[i] + &apos;]&apos;)
+  }
+  for (let n = 0, len = b.length; n &lt; len; n++) {
+    middlePat = []
+    // 当为1的时候不能取 1 取0
+    // 当为0的时候也需要过滤掉
+    // 当大于1时，需要减1，尾数全可以匹配0-9
+    if(b[n].substr(3,1) == 1) {
+        middlePat.push(&apos;[0-0]&apos;)
+    }else if(b[n].substr(3,1) == 0) {
+        middlePat.push(&apos;[0-0]&apos;)
+    }else {
+        middlePat.push(&apos;[0-&apos; + (a[n]-1) + &apos;]&apos;)
+    }
+
+    for (let m = 0, leng = b.length; m &lt; leng; m++) {
+      if (m &gt; n &amp;&amp; b[n].substr(3,1) !== &apos;0&apos;) {
+        middlePat.push(&apos;[0-9]&apos;)
+      }else if(m &gt; n &amp;&amp; b[n].substr(3,1) === &apos;0&apos;) {
+        middlePat.push(&apos;[0-0]&apos;)
+      }
+    }
+    d.push(middlePat)
+  }
+  d.map(item =&gt; {
+      if (item.length &lt; b.length) {
+        let discrepancy = b.length - item.length
+        let AA = b.slice(0, discrepancy)
+        item = AA.concat(item)
+        finallyArr.push(item)
+      }
+    return true
+  })
+
+   // 去重
+  let resetArr = []
+  finallyArr.map(item =&gt; {
+    resetArr.push(item.join(&apos;&apos;))
+  })
+  let finPat = new Set(resetArr)
+  finPat.forEach((item) =&gt; {
+    finallyReg += &apos;\^&apos; + item + &apos;\$|&apos;
+  })
+  aStr += &apos;\$&apos; + patMaxO + &apos;\|&apos; + finallyReg.slice(0, finallyReg.length - 1)
+  const finMaxPat = new RegExp(aStr)
+  reMax.type = &apos;max&apos;
+  reMax.pattern = finMaxPat
+  reMax.message = errorMessage ? errorMessage : &apos;请输入小于&apos; + max + &apos;的正整数&apos;;
+  return reMax;
+}    
+</code></pre><p>这个是出版的生成最大值的正则，其中主要的问题是边界问题。<br>1.当生成最大正则时需要考虑0和1的情况，需要特殊处理。<br>2.当生成最小正则时，需要考虑9的情况。<br><strong>生成最小值的正则</strong>    </p>
+<pre><code>function ruleMin(min, errorMessage) {
+  if (!Number(min)) return;
+  if (Number(min) &lt; 0) return;
+  let patMin = min + &apos;&apos;
+  patMin =  patMin.replace(/\b(0+)/gi,&quot;&quot;)
+  let patMinStr = &apos;\^&apos; + patMin
+  const patMinLength = patMin.length
+  let reMin = {}
+  let regArr = []
+  let patStr = []
+  let f = []
+  let finallyMinArr = []
+  let maxS;
+  let finallyMinReg = &apos;&apos;
+  for (let j = 0; j &lt; patMinLength; j++) {
+    patStr = []
+    if(Number(patMin[j]) === 9) {
+        patStr.push(&apos;[9-9]&apos;)
+    }else {
+        patStr.push(&apos;[&apos; + (Number(patMin[j]) + 1) + &apos;-9]&apos;)
+        for (let k = 0; k &lt; patMinLength; k++) {
+          if (k &lt;= j) {
+            continue;
+          } else {
+            patStr.push(&apos;[0-9]&apos;)
+          }
+        }
+    }
+    f.push(&apos;[&apos; + patMin[j] + &apos;-9]&apos;)
+    regArr.push(patStr)
+  }
+  regArr.map(item =&gt; {
+      if (item.length &lt; patMinLength) {
+        let minDiscrepancy = patMinLength - item.length
+        let addNum = f.slice(0, minDiscrepancy)
+        item = addNum.concat(item)
+        finallyMinArr.push(item)
+      } else {
+        finallyMinArr.push(item)
+      }
+    return true
+  })
+
+  let resetArr = []
+  finallyMinArr.map(item =&gt; {
+    resetArr.push(item.join(&apos;&apos;))
+  })
+  let finPat = new Set(resetArr)
+  finPat.forEach((item) =&gt; {
+    finallyMinReg += &apos;\^&apos; + item + &apos;\$|&apos;
+  })
+
+  patMinStr += &apos;\$|&apos; + finallyMinReg + &apos;\^\\d{&apos; + (patMinLength + 1) + &apos;,}&apos;
+  const finMinPat = new RegExp(patMinStr)
+  reMin.type = &apos;min&apos;
+  reMin.pattern = finMinPat
+  reMin.message = errorMessage ? errorMessage : &apos;请输入大于&apos; + min + &apos;的正整数&apos;
+  return reMin
+}    
+</code></pre><p>最终输出的内容<br><img src="../../../../img/regexp.png" alt="regexp">  </p>
+<p><strong>总结</strong><br>嗯，多想想，明确好，规划好再写就OK啦。</p>
 
       
     </div>
@@ -419,7 +491,7 @@ border-left: 5px solid #878787;
       
         <div class="post-tags">
           
-            <a href="/tags/Vue/" rel="tag"># Vue</a>
+            <a href="/tags/JS/" rel="tag"># JS</a>
           
         </div>
       
@@ -432,8 +504,8 @@ border-left: 5px solid #878787;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/28/原型链/" rel="next" title="原型链的继承">
-                <i class="fa fa-chevron-left"></i> 原型链的继承
+              <a href="/2018/07/25/在框架中使用设计模式/" rel="next" title="在框架中使用的一些设计模式">
+                <i class="fa fa-chevron-left"></i> 在框架中使用的一些设计模式
               </a>
             
           </div>
@@ -441,10 +513,6 @@ border-left: 5px solid #878787;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/01/vue的理解/" rel="prev" title="Vue的MVVM">
-                Vue的MVVM <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -499,17 +567,8 @@ border-left: 5px solid #878787;
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -571,22 +630,6 @@ border-left: 5px solid #878787;
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#起源"><span class="nav-number">1.</span> <span class="nav-text">起源</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解剖一下"><span class="nav-number"></span> <span class="nav-text">解剖一下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题来了"><span class="nav-number"></span> <span class="nav-text">问题来了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
