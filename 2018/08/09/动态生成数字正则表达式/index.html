@@ -90,7 +90,7 @@
 <meta property="og:description" content="起因        嗯~o(￣▽￣)o，项目是个基础框架，为了达到字段的动态配置。然后就有了这个 动态生成数字正则表达式的需求，老大还不忘对我说了句：“小伙子，看好你哦。”。嗯，好像就是这样！如果静态的生成的数字范围的话，还是很简单的。但动态的第一次见，嗯，沉浸在挑战的亢奋中~！    分析   如果是范围的话，那就有最小和最大的,先从最大的入手。1，动态生成正则的方法只有一种，使用new Reg">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fishluo1992.github.io/img/regexp.png">
-<meta property="og:updated_time" content="2018-09-27T10:53:17.701Z">
+<meta property="og:updated_time" content="2018-09-29T08:17:56.117Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态生成匹配数字范围的正则表达式">
 <meta name="twitter:description" content="起因        嗯~o(￣▽￣)o，项目是个基础框架，为了达到字段的动态配置。然后就有了这个 动态生成数字正则表达式的需求，老大还不忘对我说了句：“小伙子，看好你哦。”。嗯，好像就是这样！如果静态的生成的数字范围的话，还是很简单的。但动态的第一次见，嗯，沉浸在挑战的亢奋中~！    分析   如果是范围的话，那就有最小和最大的,先从最大的入手。1，动态生成正则的方法只有一种，使用new Reg">
@@ -392,7 +392,9 @@
         let AA = b.slice(0, discrepancy)
         item = AA.concat(item)
         finallyArr.push(item)
-      }
+      }else if(item.length === b.length) {
+        finallyArr.push(item)
+    }
     return true
   })
 
@@ -587,7 +589,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
